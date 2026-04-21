@@ -4,293 +4,576 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Dev Fundamentals · Addis Power Academy</title>
+    <meta name="description" content="Free HTML, CSS & JavaScript course with live simulators.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
             --primary: #3b82f6;
+            --primary-dark: #2563eb;
             --bg-primary: #0a0f1e;
             --bg-secondary: #0f172a;
+            --bg-tertiary: #1e2a44;
             --text-primary: #e0e7ff;
             --text-secondary: #9cb4d4;
+            --text-muted: #6b8cae;
             --border-color: #1e2a44;
             --success: #10b981;
+            --warning: #f59e0b;
         }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: system-ui, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
-            padding: 1.5rem;
         }
-        .container { max-width: 1200px; margin: 0 auto; }
+        
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            margin-bottom: 2rem;
+            background: var(--bg-secondary);
             border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
+        
         .logo {
-            font-weight: 800;
-            font-size: 1.4rem;
-            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
             text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.2rem;
         }
+        
+        .logo i { color: var(--primary); }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            margin-left: 1.5rem;
+            font-weight: 500;
         }
+        
         .nav-links a:hover { color: var(--primary); }
-        h1 { margin-bottom: 0.5rem; }
-        .subtitle { color: var(--text-secondary); margin-bottom: 2rem; }
+        .nav-links a.active { color: var(--primary); }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        .course-header {
+            margin-bottom: 2rem;
+        }
+        
+        .course-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
         .modules-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
+        
         .module-card {
             background: var(--bg-secondary);
             border-radius: 20px;
-            padding: 1.5rem;
+            padding: 1.8rem;
             border: 1px solid var(--border-color);
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s;
         }
-        .module-card:hover { border-color: var(--primary); transform: translateY(-2px); }
-        .module-card.completed { border-left: 4px solid var(--success); }
-        .module-card h3 { color: var(--primary); margin-bottom: 0.5rem; }
-        .module-card p { color: var(--text-secondary); font-size: 0.9rem; }
-        .module-card .status { color: var(--success); margin-top: 1rem; font-weight: 600; }
+        
+        .module-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .module-card.active {
+            border: 2px solid var(--primary);
+        }
+        
+        .module-card.completed {
+            border-left: 4px solid var(--success);
+        }
+        
+        .module-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .module-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .module-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .module-status {
+            margin-top: 1rem;
+            color: var(--success);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
         .lesson-panel {
             background: var(--bg-secondary);
             border-radius: 24px;
             padding: 2rem;
             border: 1px solid var(--border-color);
         }
-        .simulator-box {
-            background: #030712;
+        
+        .lesson-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .concepts-box {
+            background: var(--bg-tertiary);
             border-radius: 16px;
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
+        
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .concept-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .concept-item i { color: var(--success); }
+        
+        .code-box {
+            background: #030712;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        
+        .code-box pre {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        
+        .simulator-box {
+            background: var(--bg-tertiary);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .simulator-box h4 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
         textarea {
             width: 100%;
-            height: 120px;
-            background: #0f172a;
-            color: #e0e7ff;
+            height: 150px;
+            background: #030712;
+            color: var(--text-primary);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 1rem;
             font-family: monospace;
-            margin: 1rem 0;
+            margin-bottom: 1rem;
         }
-        .preview-box {
+        
+        .preview-area {
             background: white;
-            color: black;
+            color: #0f172a;
             padding: 1.5rem;
             border-radius: 12px;
             margin-top: 1rem;
         }
+        
+        .tip-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+        
         .btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0.6rem 1.5rem;
+            padding: 0.7rem 1.5rem;
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
-            margin-right: 0.5rem;
+            margin-right: 0.75rem;
+            transition: 0.2s;
         }
+        
+        .btn:hover { background: var(--primary-dark); }
+        
         .btn-outline {
             background: transparent;
             border: 2px solid var(--primary);
             color: var(--primary);
         }
-        .footer {
-            margin-top: 3rem;
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
         }
-        .footer a { color: var(--primary); text-decoration: none; }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+            color: var(--text-muted);
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
         @media (max-width: 768px) {
             .modules-grid { grid-template-columns: 1fr; }
+            .concepts-grid { grid-template-columns: 1fr; }
+            .navbar { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar">
-        <a href="https://addispower.pages.dev" class="logo">💎 ADDIS POWER <span style="font-weight:400;color:#888;font-size:0.9rem;">ACADEMY</span></a>
-        <div class="nav-links">
-            <a href="https://addispower.pages.dev">Home</a>
-            <a href="https://peacemakersclub.github.io/addispoweracademy/">Supabase</a>
-            <a href="#" style="color:var(--primary);">Web Dev</a>
-        </div>
-    </nav>
 
-    <h1>🌐 Web Development Fundamentals</h1>
-    <p class="subtitle">Master HTML, CSS, and JavaScript with live interactive simulators.</p>
+<nav class="navbar">
+    <a href="https://addispower.pages.dev" class="logo">
+        <i class="fas fa-gem"></i>
+        <span>ADDIS POWER <span style="font-weight:400;color:var(--text-muted);">ACADEMY</span></span>
+    </a>
+    <div class="nav-links">
+        <a href="https://addispower.pages.dev">Home</a>
+        <a href="https://peacemakersclub.github.io/addispoweracademy/">Supabase</a>
+        <a href="#" class="active">Web Dev</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="course-header">
+        <h1>🌐 Web Development Fundamentals</h1>
+        <p>Master HTML, CSS, and JavaScript with interactive simulators. Free forever.</p>
+    </div>
 
     <div class="modules-grid" id="modulesGrid"></div>
 
     <div class="lesson-panel" id="lessonPanel"></div>
-
-    <footer class="footer">
-        <p>ADDIS POWER WEB SOLUTION · Build without compromise.</p>
-        <p style="margin-top:1rem;">
-            <i class="fas fa-envelope"></i> <a href="mailto:addispower@proton.me">addispower@proton.me</a> · 
-            <i class="fab fa-telegram"></i> <a href="https://t.me/powr_addis">@powr_addis</a> · 
-            <i class="fas fa-globe"></i> <a href="https://addispower.pages.dev">addispower.pages.dev</a>
-        </p>
-        <p style="margin-top:1rem; font-size:0.85rem; color:#888;">© 2026 Addis Power Academy · Free for Ethiopian developers</p>
-    </footer>
 </div>
+
+<footer class="footer">
+    <p style="font-weight:700; margin-bottom:0.5rem;">ADDIS POWER WEB SOLUTION</p>
+    <p style="margin-bottom:1rem;">Build without compromise.</p>
+    <p>
+        <i class="fas fa-envelope"></i> <a href="mailto:addispower@proton.me">addispower@proton.me</a> · 
+        <i class="fab fa-telegram"></i> <a href="https://t.me/powr_addis">@powr_addis</a> · 
+        <i class="fas fa-globe"></i> <a href="https://addispower.pages.dev">addispower.pages.dev</a>
+    </p>
+    <p style="margin-top:1.5rem; font-size:0.85rem;">© 2026 Addis Power Academy · Free for Ethiopian developers</p>
+</footer>
 
 <script>
 (function(){
     const modules = [
         {
             title: 'HTML Foundations',
-            desc: 'Structure web pages with semantic tags.',
-            concepts: ['Doctype', 'Headings', 'Paragraphs', 'Links', 'Images', 'Lists'],
-            code: '<h1>Hello Addis!</h1>\n<p>Welcome to web development.</p>\n<a href="#">Learn more</a>\n<img src="https://via.placeholder.com/150" alt="Demo">\n\n<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>',
-            tip: 'HTML is the skeleton of every website.',
+            icon: 'fa-html5',
+            desc: 'Structure web pages with semantic tags',
+            concepts: ['Document structure', 'Headings & paragraphs', 'Links & images', 'Lists', 'Forms basics'],
+            code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <p>This is a paragraph.</p>
+    <a href="https://example.com">Link</a>
+    <img src="image.jpg" alt="Description">
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+</body>
+</html>`,
+            tip: 'HTML is the skeleton. Every website starts here.',
             simulator: 'html'
         },
         {
-            title: 'CSS Basics',
-            desc: 'Style your pages with colors and layouts.',
-            concepts: ['Selectors', 'Colors', 'Box Model', 'Flexbox'],
-            code: 'body {\n  font-family: sans-serif;\n  background: #f0f4f8;\n  padding: 20px;\n}\n\nh1 {\n  color: #2563eb;\n  text-align: center;\n}\n\n.button {\n  background: #3b82f6;\n  color: white;\n  padding: 12px 24px;\n  border-radius: 8px;\n}',
-            tip: 'Use classes (.) for reusable styles.',
+            title: 'CSS Styling',
+            icon: 'fa-css3-alt',
+            desc: 'Design and layout with Cascading Style Sheets',
+            concepts: ['Selectors', 'Colors & backgrounds', 'Box model', 'Flexbox', 'Responsive design'],
+            code: `body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f5f5f5;
+}
+
+h1 {
+    color: #2563eb;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.button {
+    background: #3b82f6;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #1d4ed8;
+}`,
+            tip: 'CSS brings design to life. Master Flexbox and Grid for layouts.',
             simulator: 'css'
         },
         {
-            title: 'JavaScript Essentials',
-            desc: 'Add interactivity to your pages.',
-            concepts: ['Variables', 'Functions', 'DOM', 'Events'],
-            code: '// JavaScript brings pages to life\nlet name = "Hiwot";\nconsole.log("Selam, " + name);\n\n// DOM Manipulation\ndocument.querySelector("h1").textContent = "Updated!";\n\n// Events\ndocument.querySelector("button").addEventListener("click", () => {\n  alert("Clicked!");\n});',
-            tip: 'JavaScript IS NOT Java — completely different!',
+            title: 'JavaScript Basics',
+            icon: 'fa-js',
+            desc: 'Add interactivity and dynamic behavior',
+            concepts: ['Variables', 'Functions', 'DOM manipulation', 'Events', 'Arrays & objects'],
+            code: `// Variables
+let message = "Hello World";
+const PI = 3.14159;
+
+// Functions
+function greet(name) {
+    return "Welcome, " + name + "!";
+}
+
+// DOM Manipulation
+const heading = document.querySelector('h1');
+heading.textContent = "Updated Title";
+heading.style.color = "#3b82f6";
+
+// Event Listeners
+const button = document.querySelector('button');
+button.addEventListener('click', function() {
+    alert('Button clicked!');
+});
+
+// Arrays
+const skills = ["HTML", "CSS", "JavaScript"];
+skills.push("React");`,
+            tip: 'JavaScript makes pages interactive. Practice with console.log().',
             simulator: 'js'
         }
     ];
 
     let currentModule = 0;
-    let completed = new Set(JSON.parse(localStorage.getItem('webdev_completed') || '[]'));
+    let completed = new Set(JSON.parse(localStorage.getItem('webdev_progress') || '[]'));
 
     const grid = document.getElementById('modulesGrid');
     const panel = document.getElementById('lessonPanel');
 
     function renderGrid() {
         grid.innerHTML = modules.map((m, i) => `
-            <div class="module-card ${completed.has(i) ? 'completed' : ''}" onclick="selectModule(${i})">
-                <h3>${i+1}. ${m.title}</h3>
+            <div class="module-card ${completed.has(i) ? 'completed' : ''} ${i === currentModule ? 'active' : ''}" onclick="selectModule(${i})">
+                <div class="module-icon"><i class="fab ${m.icon}"></i></div>
+                <h3>${m.title}</h3>
                 <p>${m.desc}</p>
-                ${completed.has(i) ? '<div class="status"><i class="fas fa-check-circle"></i> Completed</div>' : ''}
+                ${completed.has(i) ? '<div class="module-status"><i class="fas fa-check-circle"></i> Completed</div>' : ''}
             </div>
         `).join('');
     }
 
     window.selectModule = function(i) {
         currentModule = i;
-        renderModule(i);
         renderGrid();
+        renderLesson(i);
     };
 
-    function renderModule(i) {
+    function renderLesson(i) {
         const m = modules[i];
-        const done = completed.has(i);
+        const isCompleted = completed.has(i);
         
         let simHtml = '';
         if (m.simulator === 'html') {
             simHtml = `
                 <div class="simulator-box">
-                    <h4><i class="fab fa-html5"></i> Live HTML Preview</h4>
-                    <textarea id="htmlInput">${m.code.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
-                    <button class="btn" onclick="document.getElementById('htmlPreview').innerHTML = document.getElementById('htmlInput').value">Run</button>
-                    <div class="preview-box" id="htmlPreview"></div>
+                    <h4><i class="fab fa-html5"></i> Live HTML Editor</h4>
+                    <textarea id="htmlEditor">${escapeHtml(m.code)}</textarea>
+                    <button class="btn" onclick="updatePreview()">Run Code</button>
+                    <div class="preview-area" id="livePreview"></div>
                 </div>
             `;
         } else if (m.simulator === 'css') {
             simHtml = `
                 <div class="simulator-box">
                     <h4><i class="fab fa-css3-alt"></i> CSS Playground</h4>
-                    <input type="color" id="bgColor" value="#3b82f6" onchange="document.getElementById('cssBox').style.background = this.value">
-                    <input type="range" id="borderRadius" min="0" max="30" value="12" onchange="document.getElementById('cssBox').style.borderRadius = this.value + 'px'">
-                    <div id="cssBox" style="background:#3b82f6; padding:30px; border-radius:12px; margin-top:15px; color:white; text-align:center;">Style Me!</div>
+                    <div style="margin-bottom:1rem;">
+                        <label>Background: </label>
+                        <input type="color" id="bgPicker" value="#3b82f6" onchange="updateCssPreview()">
+                        <label style="margin-left:1rem;">Border Radius: </label>
+                        <input type="range" id="radiusSlider" min="0" max="50" value="12" onchange="updateCssPreview()">
+                    </div>
+                    <div id="cssPreview" style="background:#3b82f6; padding:40px; border-radius:12px; text-align:center; color:white; font-weight:600;">
+                        Interactive Box
+                    </div>
                 </div>
             `;
         } else if (m.simulator === 'js') {
             simHtml = `
                 <div class="simulator-box">
                     <h4><i class="fab fa-js"></i> JavaScript Console</h4>
-                    <textarea id="jsInput">${m.code.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
-                    <button class="btn" onclick="runJs()">Run</button>
-                    <div id="jsOutput" style="background:#0f172a; padding:1rem; border-radius:10px; margin-top:1rem; font-family:monospace;">> Output</div>
+                    <textarea id="jsEditor">console.log("Hello World");
+let x = 10;
+let y = 20;
+console.log("Sum:", x + y);</textarea>
+                    <button class="btn" onclick="runJavaScript()">Run Code</button>
+                    <div class="preview-area" id="jsOutput" style="background:#030712; color:#e0e7ff; font-family:monospace;">> Ready</div>
                 </div>
             `;
         }
 
         panel.innerHTML = `
-            <h2 style="color:var(--primary); margin-bottom:0.5rem;">${m.title}</h2>
+            <h2 class="lesson-title">${m.title}</h2>
             <p style="color:var(--text-secondary); margin-bottom:1.5rem;">${m.desc}</p>
             
-            <div style="background:#0a0f1e; border-radius:16px; padding:1.5rem; margin-bottom:1.5rem;">
-                <h4><i class="fas fa-gem" style="color:var(--primary);"></i> Learning Objectives</h4>
-                <ul style="margin-top:1rem; display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
-                    ${m.concepts.map(c => `<li><i class="fas fa-check-circle" style="color:var(--success);"></i> ${c}</li>`).join('')}
-                </ul>
+            <div class="concepts-box">
+                <h4><i class="fas fa-graduation-cap" style="color:var(--primary);"></i> What You'll Learn</h4>
+                <div class="concepts-grid">
+                    ${m.concepts.map(c => `
+                        <div class="concept-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>${c}</span>
+                        </div>
+                    `).join('')}
+                </div>
             </div>
             
-            <div style="background:#030712; border-radius:16px; padding:1.5rem; margin-bottom:1.5rem;">
-                <h4><i class="fas fa-code"></i> Code Example</h4>
-                <pre style="margin-top:1rem; overflow-x:auto;">${m.code.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>
+            <div class="code-box">
+                <h4 style="margin-bottom:1rem;"><i class="fas fa-code"></i> Example Code</h4>
+                <pre>${escapeHtml(m.code)}</pre>
             </div>
             
             ${simHtml}
             
-            <div style="background:#1e2a44; border-radius:16px; padding:1rem 1.5rem; margin:1.5rem 0;">
-                <i class="fas fa-lightbulb" style="color:#f59e0b;"></i> 
-                <strong>Pro tip:</strong> ${m.tip}
+            <div class="tip-box">
+                <i class="fas fa-lightbulb" style="color:var(--warning); margin-right:10px;"></i>
+                <strong>Pro Tip:</strong> ${m.tip}
             </div>
             
-            <div style="display:flex; gap:1rem; margin-top:2rem;">
-                <button class="btn" onclick="markComplete(${i})" style="background:${done?'var(--success)':'var(--primary)'};">
-                    ${done ? '<i class="fas fa-check-circle"></i> Completed' : 'Mark Complete'}
+            <div class="nav-buttons">
+                <button class="btn ${isCompleted ? '' : 'btn-outline'}" onclick="toggleComplete(${i})" style="background:${isCompleted ? 'var(--success)' : ''}">
+                    ${isCompleted ? '<i class="fas fa-check-circle"></i> Completed' : 'Mark Complete'}
                 </button>
                 ${i > 0 ? `<button class="btn btn-outline" onclick="selectModule(${i-1})"><i class="fas fa-arrow-left"></i> Previous</button>` : ''}
                 ${i < modules.length - 1 ? `<button class="btn btn-outline" onclick="selectModule(${i+1})">Next <i class="fas fa-arrow-right"></i></button>` : ''}
             </div>
         `;
+
+        if (m.simulator === 'html') {
+            setTimeout(() => updatePreview(), 50);
+        }
     }
 
-    window.markComplete = function(i) {
+    window.toggleComplete = function(i) {
         completed.has(i) ? completed.delete(i) : completed.add(i);
-        localStorage.setItem('webdev_completed', JSON.stringify([...completed]));
+        localStorage.setItem('webdev_progress', JSON.stringify([...completed]));
         renderGrid();
-        renderModule(i);
+        renderLesson(i);
     };
 
-    window.runJs = function() {
-        const code = document.getElementById('jsInput').value;
-        const out = document.getElementById('jsOutput');
-        try {
-            const result = eval(code);
-            out.innerHTML = '→ ' + (result !== undefined ? result : 'Code executed');
-        } catch(e) {
-            out.innerHTML = '❌ Error: ' + e.message;
+    window.updatePreview = function() {
+        const editor = document.getElementById('htmlEditor');
+        const preview = document.getElementById('livePreview');
+        if (editor && preview) {
+            preview.innerHTML = editor.value;
         }
     };
 
+    window.updateCssPreview = function() {
+        const bg = document.getElementById('bgPicker')?.value || '#3b82f6';
+        const radius = document.getElementById('radiusSlider')?.value || '12';
+        const box = document.getElementById('cssPreview');
+        if (box) {
+            box.style.background = bg;
+            box.style.borderRadius = radius + 'px';
+        }
+    };
+
+    window.runJavaScript = function() {
+        const code = document.getElementById('jsEditor')?.value || '';
+        const output = document.getElementById('jsOutput');
+        if (!output) return;
+        
+        let logs = [];
+        const originalLog = console.log;
+        console.log = (...args) => { logs.push(args.join(' ')); };
+        
+        try {
+            eval(code);
+            console.log = originalLog;
+            output.innerHTML = logs.length ? logs.join('<br>') : '> Code executed (no output)';
+        } catch(e) {
+            console.log = originalLog;
+            output.innerHTML = `> Error: ${e.message}`;
+        }
+    };
+
+    function escapeHtml(text) {
+        return text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
     // Initialize
     renderGrid();
-    selectModule(0);
+    renderLesson(0);
 })();
 </script>
 </body>
