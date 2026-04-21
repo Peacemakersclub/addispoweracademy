@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Addis Power Academy · Web Fundamentals</title>
+    <meta name="description" content="Free, interactive Web Development course for Ethiopian developers. Learn HTML, CSS, and JavaScript with simulators.">
+    <meta name="author" content="Addis Power Web Solution">
+    <meta property="og:title" content="Addis Power Academy · Web Fundamentals">
+    <meta property="og:description" content="Learn HTML, CSS, and JavaScript with interactive simulators. Free forever. Made in Addis.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ========== THEME SYSTEM ========== */
+        :root {
+            --primary: #3ecf8e;
+            --primary-dark: #24b47e;
+            --primary-glow: rgba(62, 207, 142, 0.15);
+            --bg-primary: #0a0f1e;
+            --bg-secondary: #0f172a;
+            --bg-tertiary: #1e2a44;
+            --text-primary: #e0e7ff;
+            --text-secondary: #9cb4d4;
+            --text-muted: #6b8cae;
+            --border-color: #1e2a44;
+            --card-bg: #0f172a;
+            --code-bg: #030712;
+            --success: #3ecf8e;
+            --warning: #fbbf24;
+            --error: #ef4444;
+        }
+        
+        [data-theme="light"] {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-glow: rgba(5, 150, 105, 0.1);
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --card-bg: #ffffff;
+            --code-bg: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background 0.3s, color 0.2s;
+        }
+
+        /* ========== SCROLLBAR ========== */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-primary);
+            font-size: 1.3rem;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text .power {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text .academy {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin-left: 4px;
+        }
+
+        .course-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .course-link {
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .course-link:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .course-link.active {
+            background: var(--primary-glow);
+            color: var(--primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .data-saver-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-tertiary);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .data-saver-badge.active {
+            background: var(--warning);
+            color: var(--bg-primary);
+        }
+
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: none;
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover { background: var(--primary); color: var(--bg-primary); }
+
+        /* ========== PROGRESS BAR ========== */
+        .progress-wrapper {
+            max-width: 1200px;
+            margin: 1.5rem auto 0;
+            padding: 0 1.5rem;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .step:hover { color: var(--primary); }
+        .step.active { color: var(--primary); font-weight: 700; }
+        .step.completed { color: var(--success); }
+
+        .progress-bar-container {
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-fill {
+            height: 8px;
+            background: var(--primary);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* ========== MAIN LAYOUT ========== */
+        .course-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1.8rem;
+        }
+
+        /* ========== SIDEBAR ========== */
+        .curriculum-sidebar {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .module-count {
+            background: var(--primary);
+            color: var(--bg-primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .module-list { list-style: none; }
+
+        .module-item {
+            padding: 0.9rem 1rem;
+            margin-bottom: 6px;
+            border-radius: 14px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.15s;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .module-item i { width: 20px; color: var(--text-muted); }
+        .module-item:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+        .module-item.active-module {
+            background: var(--primary-glow);
+            color: var(--primary);
+            border-left: 4px solid var(--primary);
+        }
+        .module-item.completed-module { color: var(--success); }
+        .module-item.completed-module i { color: var(--success); }
+
+        .module-item .check-icon {
+            margin-left: auto;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        .module-item.completed-module .check-icon { opacity: 1; }
+
+        .certificate-btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.8rem;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .certificate-btn:hover {
+            background: var(--primary);
+            color: var(--bg-primary);
+        }
+
+        /* ========== LESSON PANEL ========== */
+        .lesson-panel {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 2.2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.2);
+        }
+
+        .lesson-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .lesson-badge {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+            background: var(--primary-glow);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0.75rem 0 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .lesson-desc { color: var(--text-secondary); font-size: 1.05rem; }
+
+        /* ========== CONTENT BLOCKS ========== */
+        .explanation {
+            background: var(--primary-glow);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 1.8rem 0;
+            border-left: 6px solid var(--primary);
+        }
+
+        .explanation h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .checklist {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem 1rem;
+        }
+
+        .checklist li {
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist i.fa-check-circle { color: var(--success); }
+
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 18px;
+            margin: 1.8rem 0;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .copy-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .copy-btn:hover { background: var(--primary); color: var(--bg-primary); border-color: var(--primary); }
+
+        .code-block pre {
+            padding: 1.5rem;
+            margin: 0;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* ========== SIMULATOR ========== */
+        .simulator-box {
+            background: var(--bg-primary);
+            border-radius: 20px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .simulator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .simulator-header span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .simulator-controls { display: flex; gap: 8px; }
+
+        .run-sim-btn {
+            background: var(--primary);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+
+        .run-sim-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
+        .run-sim-btn.secondary {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+        }
+        .run-sim-btn.secondary:hover { background: var(--primary); color: var(--bg-primary); }
+
+        .sim-input-area {
+            margin-bottom: 1rem;
+        }
+
+        .sim-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .sim-output {
+            background: var(--code-bg);
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin-top: 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            border: 1px solid var(--border-color);
+            min-height: 70px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Live Preview Area */
+        .live-preview {
+            background: white;
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-top: 1.2rem;
+            border: 1px solid var(--border-color);
+            color: #0f172a;
+        }
+
+        /* ========== TIP BOX ========== */
+        .tip-box {
+            background: color-mix(in srgb, var(--warning) 10%, var(--bg-primary));
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.8rem 0;
+            border-left: 4px solid var(--warning);
+            display: flex;
+            gap: 12px;
+        }
+
+        .tip-box i { color: var(--warning); font-size: 1.2rem; margin-top: 3px; }
+
+        /* ========== NAVIGATION BUTTONS ========== */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .nav-btn:hover { background: var(--primary); color: var(--bg-primary); }
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+        .complete-btn {
+            background: var(--success);
+            color: var(--bg-primary);
+        }
+        .complete-btn:hover { background: var(--primary-dark); }
+
+        /* ========== CERTIFICATE MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 4000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active { display: flex; }
+
+        .certificate-card {
+            background: var(--card-bg);
+            border-radius: 40px;
+            padding: 3rem;
+            max-width: 650px;
+            width: 90%;
+            text-align: center;
+            border: 3px solid var(--primary);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .certificate-header {
+            margin-bottom: 2rem;
+        }
+
+        .certificate-header i {
+            font-size: 3rem;
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .certificate-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-body {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-top: 2px dashed var(--border-color);
+            border-bottom: 2px dashed var(--border-color);
+        }
+
+        .certificate-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+            color: var(--text-primary);
+        }
+
+        .certificate-course {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .certificate-footer {
+            margin-top: 2rem;
+            color: var(--text-muted);
+        }
+
+        .certificate-close {
+            background: var(--primary);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0.8rem 2.5rem;
+            border-radius: 40px;
+            font-weight: 700;
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+
+        /* ========== KEYBOARD HINT ========== */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--bg-secondary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            z-index: 100;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ========== FOOTER ========== */
+        .academy-footer {
+            margin-top: 2rem;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .footer-contact a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .footer-contact a:hover { text-decoration: underline; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .course-container { grid-template-columns: 1fr; }
+            .curriculum-sidebar { position: relative; top: 0; }
+            .navbar { flex-direction: column; }
+            .nav-left { flex-direction: column; gap: 1rem; }
+            .keyboard-hint { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .lesson-panel { padding: 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .nav-btn { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
+            .course-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">💎</div>
+            <div class="logo-text">
+                <span class="power">ADDIS POWER</span>
+                <span class="academy">ACADEMY</span>
+            </div>
+        </a>
+        <div class="course-links">
+            <a href="index.html" class="course-link">Home</a>
+            <a href="supabase.html" class="course-link">Supabase</a>
+            <a href="fundamentals.html" class="course-link active">Fundamentals</a>
+            <a href="react.html" class="course-link">React</a>
+        </div>
+    </div>
+    <div class="nav-controls">
+        <div class="data-saver-badge" id="dataSaverToggle" title="Data Saver Mode - Reduces data usage">
+            <i class="fas fa-sim-card"></i>
+            <span>Data Saver</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Progress Tracker -->
+<div class="progress-wrapper">
+    <div class="progress-steps" id="progressSteps"></div>
+    <div class="progress-bar-container">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+</div>
+
+<!-- Main Layout -->
+<div class="course-container">
+    <!-- Sidebar -->
+    <div class="curriculum-sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-list-ul"></i> Curriculum</h3>
+            <span class="module-count" id="moduleCount">8</span>
+        </div>
+        <ul class="module-list" id="moduleList"></ul>
+        <button class="certificate-btn" id="sidebarCertificateBtn">
+            <i class="fas fa-certificate"></i> Get Certificate
+        </button>
+    </div>
+
+    <!-- Lesson Panel -->
+    <div class="lesson-panel" id="lessonPanel"></div>
+</div>
+
+<!-- Certificate Modal -->
+<div class="modal" id="certificateModal">
+    <div class="certificate-card">
+        <div class="certificate-header">
+            <i class="fas fa-trophy"></i>
+            <h2>🎉 Course Completed!</h2>
+        </div>
+        <div class="certificate-body">
+            <p style="margin-bottom: 0.5rem;">This certifies that</p>
+            <div class="certificate-name" id="certStudentName">Developer</div>
+            <p class="certificate-course">has successfully completed the</p>
+            <p style="font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0; color: var(--primary);">Web Fundamentals</p>
+            <p>8 Modules · HTML, CSS, JavaScript · Responsive Design</p>
+        </div>
+        <div class="certificate-footer">
+            <p id="certDate"></p>
+            <p style="margin-top: 1rem;">Issued by</p>
+            <p style="font-weight: 700;">Addis Power Web Solution</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem;">
+                <i class="fas fa-envelope"></i> agoodperception@gmail.com · 
+                <i class="fab fa-telegram"></i> @powr_addis · 
+                <i class="fas fa-phone"></i> +251 911 573 334
+            </p>
+        </div>
+        <button class="certificate-close" onclick="document.getElementById('certificateModal').classList.remove('active')">
+            Close
+        </button>
+    </div>
+</div>
+
+<!-- Keyboard Shortcut Hint -->
+<div class="keyboard-hint">
+    <i class="fas fa-keyboard"></i> ← → navigate · space complete · esc close
+</div>
+
+<!-- Footer -->
+<footer class="academy-footer">
+    <div class="footer-brand">
+        <div class="logo-icon" style="width: 30px; height: 30px; font-size: 1rem;">💎</div>
+        <span style="font-weight: 700;">ADDIS POWER WEB SOLUTION</span>
+    </div>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Build without compromise. Learn without limits.</p>
+    <div class="footer-contact">
+        <span><i class="fas fa-envelope"></i> <a href="mailto:agoodperception@gmail.com">agoodperception@gmail.com</a></span>
+        <span><i class="fab fa-telegram"></i> <a href="https://t.me/powr_addis">@powr_addis</a></span>
+        <span><i class="fas fa-phone"></i> <a href="tel:+251911573334">+251 911 573 334</a></span>
+        <span><i class="fas fa-globe"></i> <a href="https://addispower.pages.dev" target="_blank">addispower.pages.dev</a></span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 2rem;">
+        © 2026 Addis Power Academy · Free for all Ethiopian developers
+    </p>
+</footer>
+
+<script>
+    (function(){
+        "use strict";
+
+        // ========== COURSE CONFIGURATION ==========
+        const COURSE_NAME = "Web Fundamentals";
+        const AUTHOR_NAME = "Addis Abebayehu";
+        const STORAGE_KEY = "fundamentals_completed";
+        
+        // ========== MODULE DATA ==========
+        const modules = [
+            { 
+                title: 'HTML Foundations',
+                desc: 'Learn the building blocks of the web with semantic HTML.',
+                concepts: [
+                    'Document structure & DOCTYPE',
+                    'Semantic elements (header, nav, main, article)',
+                    'Text formatting and headings',
+                    'Lists (ordered, unordered, definition)',
+                    'Links and navigation'
+                ],
+                code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Web Page</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Web Development</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    
+    <main>
+        <article>
+            <h2>Why Learn HTML?</h2>
+            <p>HTML is the foundation of every website. It provides structure and meaning to web content.</p>
+            <ul>
+                <li>Easy to learn</li>
+                <li>Universal browser support</li>
+                <li>Essential for web development</li>
+            </ul>
+        </article>
+    </main>
+    
+    <footer>
+        <p>&copy; 2026 My Website</p>
+    </footer>
+</body>
+</html>`,
+                tip: '💡 Always use semantic HTML tags like &lt;header&gt;, &lt;nav&gt;, and &lt;main&gt; instead of generic &lt;div&gt; tags. This improves accessibility and SEO.',
+                readingTime: '10 min',
+                simulator: { type: 'html' }
+            },
+            { 
+                title: 'HTML Forms & Input',
+                desc: 'Create interactive forms to collect user data.',
+                concepts: [
+                    'Form element and attributes',
+                    'Input types (text, email, password, number)',
+                    'Labels and accessibility',
+                    'Select dropdowns and textareas',
+                    'Form validation attributes'
+                ],
+                code: `<form action="/submit" method="POST">
+    <div>
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    
+    <div>
+        <label for="course">Select Course:</label>
+        <select id="course" name="course">
+            <option value="html">HTML Basics</option>
+            <option value="css">CSS Styling</option>
+            <option value="js">JavaScript</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+    </div>
+    
+    <div>
+        <input type="checkbox" id="agree" name="agree" required>
+        <label for="agree">I agree to the terms</label>
+    </div>
+    
+    <button type="submit">Submit Form</button>
+</form>`,
+                tip: '📝 Always use &lt;label&gt; elements with "for" attributes - they make forms accessible to screen readers and increase clickable area.',
+                readingTime: '12 min',
+                simulator: { type: 'form' }
+            },
+            { 
+                title: 'CSS Fundamentals',
+                desc: 'Style your HTML with Cascading Style Sheets.',
+                concepts: [
+                    'Selectors (element, class, id)',
+                    'Colors and backgrounds',
+                    'Box model (margin, padding, border)',
+                    'Typography and fonts',
+                    'CSS units (px, rem, em, %, vh/vw)'
+                ],
+                code: `/* Element Selector */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Class Selector */
+.highlight {
+    background-color: #fff3cd;
+    padding: 10px;
+    border-left: 4px solid #ffc107;
+}
+
+/* ID Selector */
+#main-header {
+    text-align: center;
+    border-bottom: 2px solid #3ecf8e;
+    padding-bottom: 20px;
+}
+
+/* Box Model Example */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Typography */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0a0f1e;
+}`,
+                tip: '🎨 Use rem units for font sizes (better accessibility) and px for borders and shadows.',
+                readingTime: '15 min',
+                simulator: { type: 'css' }
+            },
+            { 
+                title: 'Flexbox Layout',
+                desc: 'Master one-dimensional layouts with CSS Flexbox.',
+                concepts: [
+                    'Display: flex',
+                    'Main axis and cross axis',
+                    'Justify-content alignment',
+                    'Align-items and align-self',
+                    'Flex-wrap and responsive behavior'
+                ],
+                code: `.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.card {
+    flex: 1 1 300px; /* grow shrink basis */
+    min-width: 250px;
+}
+
+/* Center a single element */
+.center-single {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}`,
+                tip: '📏 Use gap property instead of margins for spacing between flex items - it only applies between items, not on the edges.',
+                readingTime: '15 min',
+                simulator: { type: 'flexbox' }
+            },
+            { 
+                title: 'CSS Grid',
+                desc: 'Create complex two-dimensional layouts with CSS Grid.',
+                concepts: [
+                    'Grid container and items',
+                    'Grid template columns and rows',
+                    'Fractional units (fr)',
+                    'Grid areas and naming',
+                    'Responsive grid with auto-fit'
+                ],
+                code: `.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* Responsive grid */
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Grid with named areas */
+.dashboard {
+    display: grid;
+    grid-template-areas: 
+        "header header header"
+        "sidebar main main"
+        "footer footer footer";
+    gap: 16px;
+}
+
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main { grid-area: main; }
+.footer { grid-area: footer; }
+
+/* Spanning columns */
+.wide-item {
+    grid-column: span 2;
+}
+
+.tall-item {
+    grid-row: span 2;
+}`,
+                tip: '🎯 Use CSS Grid for overall page layout and Flexbox for component-level alignment. They work great together!',
+                readingTime: '15 min',
+                simulator: { type: 'grid' }
+            },
+            { 
+                title: 'JavaScript Basics',
+                desc: 'Add interactivity to your websites with JavaScript.',
+                concepts: [
+                    'Variables (let, const)',
+                    'Data types and operators',
+                    'Functions and scope',
+                    'DOM manipulation',
+                    'Event listeners'
+                ],
+                code: `// Variables and Data Types
+const courseName = "Web Fundamentals";
+let studentCount = 42;
+const isActive = true;
+const modules = ["HTML", "CSS", "JavaScript"];
+
+// Functions
+function greetStudent(name) {
+    return \`Welcome, \${name}! Ready to learn \${courseName}?\`;
+}
+
+// Arrow Function
+const calculateTotal = (price, quantity) => price * quantity;
+
+// DOM Manipulation
+const button = document.querySelector('#submit-btn');
+const output = document.querySelector('#output');
+
+button.addEventListener('click', () => {
+    const nameInput = document.querySelector('#name');
+    const message = greetStudent(nameInput.value);
+    output.textContent = message;
+});
+
+// Array Methods
+const activeModules = modules.filter(mod => mod.length > 3);
+const moduleList = modules.map(mod => \`<li>\${mod}</li>\`).join('');`,
+                tip: '🔧 Use const by default, only use let when you need to reassign the variable. Avoid var in modern JavaScript.',
+                readingTime: '20 min',
+                simulator: { type: 'js' }
+            },
+            { 
+                title: 'DOM & Events',
+                desc: 'Manipulate HTML and respond to user interactions.',
+                concepts: [
+                    'Selecting elements (querySelector)',
+                    'Modifying content and styles',
+                    'Creating and removing elements',
+                    'Event types (click, input, submit)',
+                    'Event delegation'
+                ],
+                code: `// Selecting Elements
+const container = document.querySelector('.container');
+const items = document.querySelectorAll('.item');
+
+// Modifying Content
+const title = document.querySelector('h1');
+title.textContent = 'Updated Title';
+title.style.color = '#3ecf8e';
+
+// Creating Elements
+const newCard = document.createElement('div');
+newCard.className = 'card';
+newCard.innerHTML = '<h3>New Card</h3><p>Dynamically created!</p>';
+container.appendChild(newCard);
+
+// Event Handling
+const form = document.querySelector('form');
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevent page reload
+    
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    console.log('Form submitted:', data);
+});
+
+// Event Delegation (for dynamic elements)
+document.querySelector('.list').addEventListener('click', (e) => {
+    if (e.target.matches('.delete-btn')) {
+        e.target.closest('.item').remove();
+    }
+});`,
+                tip: '🎪 Use event delegation when working with dynamic content - attach event listener to parent and check e.target.',
+                readingTime: '18 min',
+                simulator: { type: 'dom' }
+            },
+            { 
+                title: '🏆 Final Project: Portfolio Site',
+                desc: 'Build a complete responsive portfolio website from scratch.',
+                concepts: [
+                    'Semantic HTML structure',
+                    'Mobile-first responsive design',
+                    'Flexbox and Grid layouts',
+                    'Interactive elements with JavaScript',
+                    'Form validation and submission',
+                    'CSS animations and transitions'
+                ],
+                code: `<!-- Complete Portfolio Structure -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: system-ui, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            min-height: 80vh;
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .project-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        button {
+            background: #3ecf8e;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h1>Portfolio</h1>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <section class="hero">
+            <div>
+                <h2>Hi, I'm [Your Name]</h2>
+                <p>Web Developer passionate about creating beautiful, functional websites.</p>
+                <button onclick="alert('Welcome!')">View My Work</button>
+            </div>
+            <div>🖥️ [Your Photo/Illustration]</div>
+        </section>
+        
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Project 1</h3>
+                    <p>Description of your amazing project.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Project 2</h3>
+                    <p>Another great project you built.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <form class="contact-form" onsubmit="alert('Message sent!'); return false;">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>`,
+                tip: '🚀 Congratulations! You now have all the skills to build professional websites. Keep practicing and building projects!',
+                readingTime: '25 min',
+                simulator: { type: 'portfolio' }
+            }
+        ];
+
+        // ========== STATE MANAGEMENT ==========
+        let currentModule = 0;
+        let completedModules = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+        let dataSaverMode = localStorage.getItem('dataSaver') === 'true';
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+
+        // DOM Elements
+        const lessonPanel = document.getElementById('lessonPanel');
+        const moduleList = document.getElementById('moduleList');
+        const progressSteps = document.getElementById('progressSteps');
+        const progressFill = document.getElementById('progressFill');
+        const themeToggle = document.getElementById('themeToggle');
+        const dataSaverToggle = document.getElementById('dataSaverToggle');
+
+        // ========== THEME MANAGEMENT ==========
+        function initTheme() {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            themeToggle.innerHTML = currentTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeToggle.innerHTML = currentTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // ========== DATA SAVER ==========
+        function initDataSaver() {
+            if (dataSaverMode) {
+                dataSaverToggle.classList.add('active');
+            } else {
+                dataSaverToggle.classList.remove('active');
+            }
+        }
+        
+        dataSaverToggle.addEventListener('click', () => {
+            dataSaverMode = !dataSaverMode;
+            localStorage.setItem('dataSaver', dataSaverMode);
+            initDataSaver();
+            renderModule(currentModule);
+        });
+
+        // ========== PROGRESS & UI ==========
+        function saveProgress() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify([...completedModules]));
+            localStorage.setItem('fundamentals_last_module', currentModule);
+        }
+
+        function updateProgressUI() {
+            // Update steps
+            progressSteps.innerHTML = '';
+            modules.forEach((_, idx) => {
+                const step = document.createElement('div');
+                step.className = `step ${idx === currentModule ? 'active' : ''} ${completedModules.has(idx) ? 'completed' : ''}`;
+                step.textContent = `${idx + 1}`;
+                step.addEventListener('click', () => { currentModule = idx; renderModule(currentModule); });
+                progressSteps.appendChild(step);
+            });
+            
+            // Update progress bar
+            const completedCount = completedModules.size;
+            const percent = (completedCount / modules.length) * 100;
+            progressFill.style.width = Math.min(percent, 100) + '%';
+            
+            // Update sidebar
+            moduleList.innerHTML = '';
+            modules.forEach((mod, idx) => {
+                const li = document.createElement('li');
+                li.className = `module-item ${idx === currentModule ? 'active-module' : ''} ${completedModules.has(idx) ? 'completed-module' : ''}`;
+                li.innerHTML = `
+                    <i class="fas fa-${['code','form','paint-brush','arrows-alt','th','js','mouse-pointer','crown'][idx] || 'book'}"></i>
+                    <span>${idx + 1}. ${mod.title}</span>
+                    <i class="fas fa-check-circle check-icon"></i>
+                `;
+                li.addEventListener('click', () => { currentModule = idx; renderModule(currentModule); });
+                moduleList.appendChild(li);
+            });
+            
+            document.getElementById('moduleCount').textContent = modules.length;
+            saveProgress();
+        }
+
+        // ========== SIMULATOR RENDERERS ==========
+        function getSimulatorHTML(mod, idx) {
+            if (dataSaverMode) {
+                return `
+                    <div class="simulator-box" style="opacity:0.7;">
+                        <div class="simulator-header">
+                            <span><i class="fas fa-flask"></i> Simulator (Hidden - Data Saver Mode)</span>
+                        </div>
+                        <div class="sim-output">
+                            <i class="fas fa-sim-card"></i> Simulator hidden to save data. 
+                            <a href="#" onclick="dataSaverMode=false; localStorage.setItem('dataSaver','false'); renderModule(${idx}); return false;" style="color:var(--primary);">Disable Data Saver</a>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            switch(mod.simulator.type) {
+                case 'html':
+                    return `
+                        <div class="simulator-box">
+                            <div class="simulator-header">
+                                <span><i class="fas fa-code"></i> HTML Live Preview</span>
+                                <button class="run-sim-btn" onclick="window.simulateHTML()"><i class="fas fa-play"></i> Render HTML</button>
+                            </div>
+                            <div class="sim-input-area">
+                                <textarea class="sim-input" id="htmlInput" rows="4"><h2>Hello World!</h2><p>This is <strong>bold</strong> and <em>italic</em> text.</p></textarea>
+                            </div>
+                            <div class="live-preview" id="htmlPreview${idx}">
+                                <h2>Hello World!</h2>
+                                <p>This is <strong>bold</strong> and <em>italic</em> text.</p>
+                            </div>
+                        </div>
+                    `;
+                case 'form':
+                    return `
+                        <div class="simulator-box">
+                            <div class="simulator-header">
+                                <span><i class="fas fa-wpforms"></i> Form Tester</span>
+                                <button class="run-sim-btn" onclick="window.simulateForm()"><i class="fas fa-check"></i> Test Form</button>
+                            </div>
+                            <div class="sim-output" id="simOutput${idx}">
+                                Fill out the form fields above and click Test Form
+                            </div>
+                        </div>
+                    `;
+                case 'css':
+                    return `
+                        <div class="simulator-box">
+                            <div class="simulator-header">
+                                <span><i class="fas fa-paint-brush"></i> CSS Playground</span>
+                                <button class="run-sim-btn" onclick="window.simulateCSS()"><i class="fas fa-sync-alt"></i> Apply Styles</button>
+                            </div>
+                            <div class="sim-output" id="simOutput${idx}">
+                                Click to see CSS color and spacing effects
+                            </div>
+                            <div id="cssDemo" style="margin-top:1rem; padding:1rem; border-radius:8px;">Sample Text</div>
+                        </div>
+                    `;
+                case 'flexbox':
+                    return `
+                        <div class="simulator-box">
+                            <div class="simulator-header">
+                                <span><i class="fas fa-arrows-alt-h"></i> Flexbox Visualizer</span>
+                                <div class="simulator-controls">
+                                    <button class="run-sim-btn" onclick="window.simulateFlex('center')">Center</button>
+                                    <button class="run-sim-btn secondary" onclick="window.simulateFlex('between')">Space Between</button>
+                                    <button class="run-sim-btn secondary" onclick="window.simulateFlex('around')">Space Around</button>
+                                </div>
+                            </div>
+                            <div id="flexDemo" style="display:flex; gap:10px; margin-top:1rem;">
+                                <div style="background:var(--primary); padding:1rem; border-radius:8px;">Item 1</div>
+                                <div style="background:var(--primary-dark); padding:1rem; border-radius:8px;">Item 2</div>
+                                <div style="background:var(--primary); padding:1rem; border-radius:8px;">Item 3</div>
+                            </div>
+                        </div>
+                    `;
+                case 'grid':
+                    return `
+                        <div class="simulator-box">
+                            <div class="simulator-header">
+                                <span><i class="fas fa-th"></i> Grid Playground</span>
+                                <button class="run-sim-btn" onclick="window.simulateGrid()"><i class="fas fa-random"></i> Toggle Layout</button>
+                            </div>
+                            <div id="gridDemo" style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:1rem;">
+                                <div style="background:var(--primary); padding:1rem; border-radius:8px;">1</div>
+                                <div style="background:var(--primary); padding:1rem; border-radius:8px;">2</div>
+                                <div style="background:var(--primary); padding:1rem; border-radius:8px;">3</div>
+                                <div style="background:var(--primary); padding:1rem; border-radius:8px;">4</div>
+                                <div style="background:var(--primary); padding:1rem; border-radius:8px;">5</div>
+                                <div style="background:var(--primary); padding:1rem; border-radius:8px;">6</div>
+                            </div>
+                        </div>
+                    `;
+                case 'js':
+                    return `
+                        <div class="simulator-box">
+                            <div class="simulator-header">
+                                <span><i class="fab fa-js"></i> JavaScript Console</span>
+                                <button class="run-sim-btn" onclick="window.simulateJS()"><i class="fas fa-play"></i> Run Code</button>
+                            </div>
+                            <div class="sim-output" id="simOutput${idx}">
+                                // JavaScript output will appear here
+                                let x = 10;
+                                let y = 20;
+                                console.log(x + y);
+                            </div>
+                        </div>
+                    `;
+                case 'dom':
+                    return `
+                        <div class="simulator-box">
+                            <div class="simulator-header">
+                                <span><i class="fas fa-mouse-pointer"></i> DOM Manipulator</span>
+                                <div class="simulator-controls">
+                                    <button class="run-sim-btn" onclick="window.simulateDOM('add')">Add Element</button>
+                                    <button class="run-sim-btn secondary" onclick="window.simulateDOM('change')">Change Color</button>
+                                    <button class="run-sim-btn secondary" onclick="window.simulateDOM('remove')">Remove</button>
+                                </div>
+                            </div>
+                            <div id="domContainer" style="margin-top:1rem;">
+                                <p class="dom-item">Click buttons to manipulate me!</p>
+                            </div>
+                        </div>
+                    `;
+                default:
+                    return `
+                        <div class="simulator-box">
+                            <div class="simulator-header">
+                                <span><i class="fas fa-flask"></i> Interactive Playground</span>
+                                <button class="run-sim-btn" onclick="window.simulateGeneric()"><i class="fas fa-play"></i> Try It</button>
+                            </div>
+                            <div class="sim-output" id="simOutput${idx}">
+                                Click the button to see this module in action!
+                            </div>
+                        </div>
+                    `;
+            }
+        }
+
+        // ========== RENDER MODULE ==========
+        function renderModule(idx) {
+            const mod = modules[idx];
+            const completed = completedModules.has(idx);
+            
+            const html = `
+                <div class="lesson-header">
+                    <div class="lesson-meta">
+                        <span><i class="far fa-clock"></i> ${mod.readingTime}</span>
+                        <span><i class="far fa-bookmark"></i> Module ${idx + 1}/${modules.length}</span>
+                        ${completed ? '<span style="color:var(--success);"><i class="fas fa-check-circle"></i> Completed</span>' : ''}
+                    </div>
+                    <span class="lesson-badge">${idx === 7 ? '🎓 FINAL PROJECT' : 'CORE MODULE'}</span>
+                    <h2 class="lesson-title">${mod.title}</h2>
+                    <p class="lesson-desc">${mod.desc}</p>
+                </div>
+                
+                <div class="explanation">
+                    <h4><i class="fas fa-gem"></i> Learning Objectives</h4>
+                    <ul class="checklist">
+                        ${mod.concepts.map(c => `<li><i class="fas fa-check-circle"></i> ${c}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span><i class="fas fa-code"></i> ${idx === 7 ? 'Complete Portfolio Code' : 'Code Example'}</span>
+                        <button class="copy-btn" data-code="${encodeURIComponent(mod.code)}"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <pre>${escapeHTML(mod.code)}</pre>
+                </div>
+                
+                ${getSimulatorHTML(mod, idx)}
+                
+                <div class="tip-box">
+                    <i class="fas fa-lightbulb"></i>
+                    <div><strong>Pro tip:</strong> ${mod.tip}</div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="prevBtn" ${idx === 0 ? 'disabled' : ''}>
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn ${completed ? '' : 'complete-btn'}" id="completeBtn">
+                        ${completed ? '<i class="fas fa-check-circle"></i> Completed' : '<i class="fas fa-check"></i> Mark Complete'}
+                    </button>
+                    <button class="nav-btn" id="nextBtn">
+                        ${idx === modules.length - 1 ? 'Finish 🎓' : 'Next'} <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            `;
+            
+            lessonPanel.innerHTML = html;
+            
+            // Attach event listeners
+            document.getElementById('prevBtn')?.addEventListener('click', () => {
+                if (currentModule > 0) { currentModule--; renderModule(currentModule); updateProgressUI(); }
+            });
+            
+            document.getElementById('nextBtn')?.addEventListener('click', () => {
+                if (currentModule < modules.length - 1) {
+                    currentModule++;
+                    renderModule(currentModule);
+                    updateProgressUI();
+                } else {
+                    if (completedModules.size === modules.length) {
+                        showCertificate();
+                    }
+                }
+            });
+            
+            document.getElementById('completeBtn')?.addEventListener('click', () => {
+                if (completedModules.has(idx)) {
+                    completedModules.delete(idx);
+                } else {
+                    completedModules.add(idx);
+                }
+                updateProgressUI();
+                renderModule(idx);
+                
+                if (completedModules.size === modules.length) {
+                    showCertificate();
+                }
+            });
+            
+            // Copy button
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const code = decodeURIComponent(btn.dataset.code);
+                    navigator.clipboard?.writeText(code);
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => btn.innerHTML = '<i class="far fa-copy"></i> Copy', 1500);
+                });
+            });
+            
+            updateProgressUI();
+        }
+
+        // ========== SIMULATOR FUNCTIONS ==========
+        window.simulateHTML = function() {
+            const input = document.getElementById('htmlInput');
+            const preview = document.querySelector('[id^="htmlPreview"]');
+            if (input && preview) {
+                preview.innerHTML = input.value;
+            }
+        };
+        
+        window.simulateForm = function() {
+            const output = document.querySelector('[id^="simOutput"]');
+            if (output) {
+                output.innerHTML = `✅ Form validation simulated!\n\nFields checked:\n- Required fields: OK\n- Email format: valid@email.com\n- Form ready to submit.`;
+            }
+        };
+        
+        window.simulateCSS = function() {
+            const demo = document.getElementById('cssDemo');
+            const output = document.querySelector('[id^="simOutput"]');
+            if (demo) {
+                const colors = ['#3ecf8e', '#ff6b6b', '#4ecdc4', '#ffe66d'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                demo.style.backgroundColor = randomColor;
+                demo.style.padding = '1.5rem';
+                demo.style.borderRadius = '16px';
+                demo.style.transition = 'all 0.3s';
+                demo.textContent = 'Styles Applied! 🎨';
+            }
+            if (output) {
+                output.innerHTML = `✅ CSS properties applied!\nbackground-color, padding, border-radius updated.`;
+            }
+        };
+        
+        window.simulateFlex = function(type) {
+            const demo = document.getElementById('flexDemo');
+            if (demo) {
+                if (type === 'center') demo.style.justifyContent = 'center';
+                else if (type === 'between') demo.style.justifyContent = 'space-between';
+                else if (type === 'around') demo.style.justifyContent = 'space-around';
+            }
+        };
+        
+        window.simulateGrid = function() {
+            const demo = document.getElementById('gridDemo');
+            if (demo) {
+                const currentCols = demo.style.gridTemplateColumns;
+                demo.style.gridTemplateColumns = currentCols === 'repeat(3, 1fr)' ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
+            }
+        };
+        
+        window.simulateJS = function() {
+            const output = document.querySelector('[id^="simOutput"]');
+            if (output) {
+                const x = 10, y = 20;
+                const sum = x + y;
+                const message = `Hello, Web Developer!`;
+                output.innerHTML = `// JavaScript Execution Result:\n> let x = ${x};\n> let y = ${y};\n> console.log(x + y);\n${sum}\n\n> const message = "${message}";\n> message.toUpperCase();\n"${message.toUpperCase()}"`;
+            }
+        };
+        
+        window.simulateDOM = function(action) {
+            const container = document.getElementById('domContainer');
+            if (!container) return;
+            
+            if (action === 'add') {
+                const newEl = document.createElement('p');
+                newEl.className = 'dom-item';
+                newEl.textContent = 'New element added! 🎉';
+                newEl.style.color = 'var(--primary)';
+                container.appendChild(newEl);
+            } else if (action === 'change') {
+                const items = container.querySelectorAll('.dom-item');
+                items.forEach(el => {
+                    el.style.backgroundColor = 'var(--primary-glow)';
+                    el.style.padding = '0.5rem';
+                    el.style.borderRadius = '8px';
+                });
+            } else if (action === 'remove') {
+                const lastItem = container.querySelector('.dom-item:last-child');
+                if (lastItem && container.children.length > 1) {
+                    lastItem.remove();
+                }
+            }
+        };
+        
+        window.simulateGeneric = function() {
+            const output = document.querySelector('[id^="simOutput"]');
+            if (output) {
+                output.innerHTML = `🎯 Interactive feature ready!\n\nThis is where you can experiment with the concepts from this module.`;
+            }
+        };
+
+        // ========== CERTIFICATE ==========
+        function showCertificate() {
+            document.getElementById('certStudentName').textContent = AUTHOR_NAME;
+            document.getElementById('certDate').innerHTML = `<i class="far fa-calendar-alt"></i> ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+            document.getElementById('certificateModal').classList.add('active');
+        }
+        
+        document.getElementById('sidebarCertificateBtn').addEventListener('click', () => {
+            if (completedModules.size === modules.length) {
+                showCertificate();
+            } else {
+                alert(`Complete all ${modules.length} modules to earn your certificate! You've completed ${completedModules.size} so far.`);
+            }
+        });
+
+        // ========== KEYBOARD SHORTCUTS ==========
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            if (e.key === 'ArrowLeft' && currentModule > 0) {
+                e.preventDefault();
+                currentModule--;
+                renderModule(currentModule);
+                updateProgressUI();
+            } else if (e.key === 'ArrowRight' && currentModule < modules.length - 1) {
+                e.preventDefault();
+                currentModule++;
+                renderModule(currentModule);
+                updateProgressUI();
+            } else if (e.key === ' ' && !e.target.closest('button')) {
+                e.preventDefault();
+                const idx = currentModule;
+                if (completedModules.has(idx)) {
+                    completedModules.delete(idx);
+                } else {
+                    completedModules.add(idx);
+                }
+                updateProgressUI();
+                renderModule(idx);
+                if (completedModules.size === modules.length) showCertificate();
+            } else if (e.key === 'Escape') {
+                document.getElementById('certificateModal').classList.remove('active');
+            }
+        });
+
+        // ========== UTILITIES ==========
+        function escapeHTML(str) {
+            return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // ========== INITIALIZE ==========
+        function init() {
+            initTheme();
+            initDataSaver();
+            
+            const lastModule = parseInt(localStorage.getItem('fundamentals_last_module') || '0');
+            if (lastModule < modules.length) currentModule = lastModule;
+            
+            renderModule(currentModule);
+            updateProgressUI();
+            
+            document.getElementById('certificateModal').addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    document.getElementById('certificateModal').classList.remove('active');
+                }
+            });
+        }
+
+        init();
+    })();
+</script>
+</body>
+</html>
