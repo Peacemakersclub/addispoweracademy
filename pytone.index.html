@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Addis Power Academy · Python Programming</title>
+    <meta name="description" content="Free, interactive Python course for Ethiopian developers. Learn Python from basics to OOP with simulators.">
+    <meta name="author" content="Addis Power Web Solution">
+    <meta property="og:title" content="Addis Power Academy · Python Programming">
+    <meta property="og:description" content="Learn Python with interactive simulators. Free forever. Made in Addis.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ========== THEME SYSTEM ========== */
+        :root {
+            --primary: #3ecf8e;
+            --primary-dark: #24b47e;
+            --primary-glow: rgba(62, 207, 142, 0.15);
+            --bg-primary: #0a0f1e;
+            --bg-secondary: #0f172a;
+            --bg-tertiary: #1e2a44;
+            --text-primary: #e0e7ff;
+            --text-secondary: #9cb4d4;
+            --text-muted: #6b8cae;
+            --border-color: #1e2a44;
+            --card-bg: #0f172a;
+            --code-bg: #030712;
+            --success: #3ecf8e;
+            --warning: #fbbf24;
+            --error: #ef4444;
+        }
+        
+        [data-theme="light"] {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-glow: rgba(5, 150, 105, 0.1);
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --card-bg: #ffffff;
+            --code-bg: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background 0.3s, color 0.2s;
+        }
+
+        /* ========== SCROLLBAR ========== */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-primary);
+            font-size: 1.3rem;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text .power {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text .academy {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin-left: 4px;
+        }
+
+        .course-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .course-link {
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .course-link:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .course-link.active {
+            background: var(--primary-glow);
+            color: var(--primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .data-saver-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-tertiary);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .data-saver-badge.active {
+            background: var(--warning);
+            color: var(--bg-primary);
+        }
+
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: none;
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover { background: var(--primary); color: var(--bg-primary); }
+
+        /* ========== PROGRESS BAR ========== */
+        .progress-wrapper {
+            max-width: 1200px;
+            margin: 1.5rem auto 0;
+            padding: 0 1.5rem;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .step:hover { color: var(--primary); }
+        .step.active { color: var(--primary); font-weight: 700; }
+        .step.completed { color: var(--success); }
+
+        .progress-bar-container {
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-fill {
+            height: 8px;
+            background: var(--primary);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* ========== MAIN LAYOUT ========== */
+        .course-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1.8rem;
+        }
+
+        /* ========== SIDEBAR ========== */
+        .curriculum-sidebar {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .module-count {
+            background: var(--primary);
+            color: var(--bg-primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .module-list { list-style: none; }
+
+        .module-item {
+            padding: 0.9rem 1rem;
+            margin-bottom: 6px;
+            border-radius: 14px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.15s;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .module-item i { width: 20px; color: var(--text-muted); }
+        .module-item:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+        .module-item.active-module {
+            background: var(--primary-glow);
+            color: var(--primary);
+            border-left: 4px solid var(--primary);
+        }
+        .module-item.completed-module { color: var(--success); }
+        .module-item.completed-module i { color: var(--success); }
+
+        .module-item .check-icon {
+            margin-left: auto;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        .module-item.completed-module .check-icon { opacity: 1; }
+
+        .certificate-btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.8rem;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .certificate-btn:hover {
+            background: var(--primary);
+            color: var(--bg-primary);
+        }
+
+        /* ========== LESSON PANEL ========== */
+        .lesson-panel {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 2.2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.2);
+        }
+
+        .lesson-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .lesson-badge {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+            background: var(--primary-glow);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0.75rem 0 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .lesson-desc { color: var(--text-secondary); font-size: 1.05rem; }
+
+        /* ========== CONTENT BLOCKS ========== */
+        .explanation {
+            background: var(--primary-glow);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 1.8rem 0;
+            border-left: 6px solid var(--primary);
+        }
+
+        .explanation h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .checklist {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem 1rem;
+        }
+
+        .checklist li {
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist i.fa-check-circle { color: var(--success); }
+
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 18px;
+            margin: 1.8rem 0;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .copy-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .copy-btn:hover { background: var(--primary); color: var(--bg-primary); border-color: var(--primary); }
+
+        .code-block pre {
+            padding: 1.5rem;
+            margin: 0;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* ========== SIMULATOR ========== */
+        .simulator-box {
+            background: var(--bg-primary);
+            border-radius: 20px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .simulator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .simulator-header span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .simulator-controls { display: flex; gap: 8px; }
+
+        .run-sim-btn {
+            background: var(--primary);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+
+        .run-sim-btn:hover { background: var(--primary-dark); transform: scale(1.02); }
+        .run-sim-btn.secondary {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+        }
+        .run-sim-btn.secondary:hover { background: var(--primary); color: var(--bg-primary); }
+
+        .sim-input-area {
+            margin-bottom: 1rem;
+        }
+
+        .sim-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .sim-output {
+            background: var(--code-bg);
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin-top: 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            border: 1px solid var(--border-color);
+            min-height: 70px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* ========== TIP BOX ========== */
+        .tip-box {
+            background: color-mix(in srgb, var(--warning) 10%, var(--bg-primary));
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.8rem 0;
+            border-left: 4px solid var(--warning);
+            display: flex;
+            gap: 12px;
+        }
+
+        .tip-box i { color: var(--warning); font-size: 1.2rem; margin-top: 3px; }
+
+        /* ========== NAVIGATION BUTTONS ========== */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .nav-btn:hover { background: var(--primary); color: var(--bg-primary); }
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+        .complete-btn {
+            background: var(--success);
+            color: var(--bg-primary);
+        }
+        .complete-btn:hover { background: var(--primary-dark); }
+
+        /* ========== CERTIFICATE MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 4000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active { display: flex; }
+
+        .certificate-card {
+            background: var(--card-bg);
+            border-radius: 40px;
+            padding: 3rem;
+            max-width: 650px;
+            width: 90%;
+            text-align: center;
+            border: 3px solid var(--primary);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .certificate-header {
+            margin-bottom: 2rem;
+        }
+
+        .certificate-header i {
+            font-size: 3rem;
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .certificate-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-body {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-top: 2px dashed var(--border-color);
+            border-bottom: 2px dashed var(--border-color);
+        }
+
+        .certificate-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+            color: var(--text-primary);
+        }
+
+        .certificate-course {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .certificate-footer {
+            margin-top: 2rem;
+            color: var(--text-muted);
+        }
+
+        .certificate-close {
+            background: var(--primary);
+            color: var(--bg-primary);
+            border: none;
+            padding: 0.8rem 2.5rem;
+            border-radius: 40px;
+            font-weight: 700;
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+
+        /* ========== KEYBOARD HINT ========== */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--bg-secondary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            z-index: 100;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ========== FOOTER ========== */
+        .academy-footer {
+            margin-top: 2rem;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .footer-contact a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .footer-contact a:hover { text-decoration: underline; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .course-container { grid-template-columns: 1fr; }
+            .curriculum-sidebar { position: relative; top: 0; }
+            .navbar { flex-direction: column; }
+            .nav-left { flex-direction: column; gap: 1rem; }
+            .keyboard-hint { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .lesson-panel { padding: 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .nav-btn { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
+            .course-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">💎</div>
+            <div class="logo-text">
+                <span class="power">ADDIS POWER</span>
+                <span class="academy">ACADEMY</span>
+            </div>
+        </a>
+        <div class="course-links">
+            <a href="index.html" class="course-link">Home</a>
+            <a href="supabase.html" class="course-link">Supabase</a>
+            <a href="fundamentals.html" class="course-link">Fundamentals</a>
+            <a href="react.html" class="course-link">React</a>
+            <a href="python.html" class="course-link active">Python</a>
+        </div>
+    </div>
+    <div class="nav-controls">
+        <div class="data-saver-badge" id="dataSaverToggle" title="Data Saver Mode - Reduces data usage">
+            <i class="fas fa-sim-card"></i>
+            <span>Data Saver</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Progress Tracker -->
+<div class="progress-wrapper">
+    <div class="progress-steps" id="progressSteps"></div>
+    <div class="progress-bar-container">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+</div>
+
+<!-- Main Layout -->
+<div class="course-container">
+    <!-- Sidebar -->
+    <div class="curriculum-sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-list-ul"></i> Curriculum</h3>
+            <span class="module-count" id="moduleCount">8</span>
+        </div>
+        <ul class="module-list" id="moduleList"></ul>
+        <button class="certificate-btn" id="sidebarCertificateBtn">
+            <i class="fas fa-certificate"></i> Get Certificate
+        </button>
+    </div>
+
+    <!-- Lesson Panel -->
+    <div class="lesson-panel" id="lessonPanel"></div>
+</div>
+
+<!-- Certificate Modal -->
+<div class="modal" id="certificateModal">
+    <div class="certificate-card">
+        <div class="certificate-header">
+            <i class="fas fa-trophy"></i>
+            <h2>🎉 Course Completed!</h2>
+        </div>
+        <div class="certificate-body">
+            <p style="margin-bottom: 0.5rem;">This certifies that</p>
+            <div class="certificate-name" id="certStudentName">Developer</div>
+            <p class="certificate-course">has successfully completed the</p>
+            <p style="font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0; color: var(--primary);">Python Programming</p>
+            <p>8 Modules · Basics to OOP · Data Structures</p>
+        </div>
+        <div class="certificate-footer">
+            <p id="certDate"></p>
+            <p style="margin-top: 1rem;">Issued by</p>
+            <p style="font-weight: 700;">Addis Power Web Solution</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem;">
+                <i class="fas fa-envelope"></i> agoodperception@gmail.com · 
+                <i class="fab fa-telegram"></i> @powr_addis · 
+                <i class="fas fa-phone"></i> +251 911 573 334
+            </p>
+        </div>
+        <button class="certificate-close" onclick="document.getElementById('certificateModal').classList.remove('active')">
+            Close
+        </button>
+    </div>
+</div>
+
+<!-- Keyboard Shortcut Hint -->
+<div class="keyboard-hint">
+    <i class="fas fa-keyboard"></i> ← → navigate · space complete · esc close
+</div>
+
+<!-- Footer -->
+<footer class="academy-footer">
+    <div class="footer-brand">
+        <div class="logo-icon" style="width: 30px; height: 30px; font-size: 1rem;">💎</div>
+        <span style="font-weight: 700;">ADDIS POWER WEB SOLUTION</span>
+    </div>
+    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Build without compromise. Learn without limits.</p>
+    <div class="footer-contact">
+        <span><i class="fas fa-envelope"></i> <a href="mailto:agoodperception@gmail.com">agoodperception@gmail.com</a></span>
+        <span><i class="fab fa-telegram"></i> <a href="https://t.me/powr_addis">@powr_addis</a></span>
+        <span><i class="fas fa-phone"></i> <a href="tel:+251911573334">+251 911 573 334</a></span>
+        <span><i class="fas fa-globe"></i> <a href="https://addispower.pages.dev" target="_blank">addispower.pages.dev</a></span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 2rem;">
+        © 2026 Addis Power Academy · Free for all Ethiopian developers
+    </p>
+</footer>
+
+<script>
+    (function(){
+        "use strict";
+
+        // ========== COURSE CONFIGURATION ==========
+        const COURSE_NAME = "Python Programming";
+        const AUTHOR_NAME = "Addis Abebayehu";
+        const STORAGE_KEY = "python_completed";
+        
+        // ========== MODULE DATA ==========
+        const modules = [
+            { 
+                title: 'Python Basics',
+                desc: 'Learn Python syntax, variables, data types, and basic operations.',
+                concepts: [
+                    'Print and Input functions',
+                    'Variables and naming conventions',
+                    'Data types (str, int, float, bool)',
+                    'Type conversion',
+                    'Basic operators (+, -, *, /, //, %, **)'
+                ],
+                code: `# Python Basics
+# Variables and Data Types
+name = "Ethiopia"          # string
+population = 120_000_000   # integer (underscores for readability)
+area = 1104300.0          # float
+is_landlocked = False     # boolean
+
+# Print and Input
+print(f"Welcome to {name}!")
+user_name = input("What's your name? ")
+
+# Type Conversion
+age_str = "25"
+age = int(age_str)
+height = float(input("Enter height in meters: "))
+
+# Basic Operations
+sum_result = 10 + 5
+division = 10 / 3        # 3.333...
+integer_division = 10 // 3  # 3
+remainder = 10 % 3        # 1
+power = 2 ** 8           # 256
+
+print(f"Hello {user_name}, you are {age} years old!")`,
+                tip: '🐍 Python uses dynamic typing - variables don\'t need type declarations. Use f-strings (f"Hello {name}") for clean string formatting.',
+                readingTime: '10 min',
+                simulator: { type: 'basics' }
+            },
+            { 
+                title: 'Control Flow',
+                desc: 'Master if statements, loops, and program flow control.',
+                concepts: [
+                    'if, elif, else statements',
+                    'Comparison and logical operators',
+                    'for loops with range()',
+                    'while loops',
+                    'break and continue'
+                ],
+                code: `# Control Flow in Python
+# If-Elif-Else
+score = 85
+if score >= 90:
+    grade = "A"
+elif score >= 80:
+    grade = "B"
+elif score >= 70:
+    grade = "C"
+else:
+    grade = "F"
+print(f"Grade: {grade}")
+
+# For Loop with Range
+print("Counting to 5:")
+for i in range(1, 6):
+    print(f"Number {i}")
+
+# While Loop
+count = 0
+while count < 3:
+    print(f"Attempt {count + 1}")
+    count += 1
+
+# Break and Continue
+for num in range(10):
+    if num == 3:
+        continue  # Skip 3
+    if num == 7:
+        break     # Stop at 7
+    print(num)    # Prints: 0, 1, 2, 4, 5, 6
+
+# Logical Operators
+is_student = True
+has_id = True
+if is_student and has_id:
+    print("Access granted")`,
+                tip: '🎯 Python uses indentation (4 spaces) instead of braces {}. Consistent indentation is not just style - it\'s required!',
+                readingTime: '12 min',
+                simulator: { type: 'control' }
+            },
+            { 
+                title: 'Functions & Scope',
+                desc: 'Create reusable code blocks with functions and understand variable scope.',
+                concepts: [
+                    'Defining functions with def',
+                    'Parameters and return values',
+                    'Default arguments',
+                    '*args and **kwargs',
+                    'Local vs Global scope'
+                ],
+                code: `# Python Functions
+# Basic Function
+def greet(name, greeting="Hello"):
+    """This is a docstring - describes the function."""
+    return f"{greeting}, {name}!"
+
+# Multiple Return Values
+def get_min_max(numbers):
+    return min(numbers), max(numbers)
+
+# *args (variable positional arguments)
+def sum_all(*args):
+    return sum(args)
+
+# **kwargs (variable keyword arguments)
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+# Using Functions
+message = greet("Developer", "Welcome")
+print(message)  # "Welcome, Developer!"
+
+nums = [3, 1, 4, 1, 5, 9, 2]
+minimum, maximum = get_min_max(nums)
+print(f"Min: {minimum}, Max: {maximum}")
+
+total = sum_all(1, 2, 3, 4, 5)  # 15
+print_info(name="Python", version="3.11", year=2026)
+
+# Scope Example
+global_var = "I'm global"
+
+def scope_demo():
+    local_var = "I'm local"
+    print(global_var)  # Can access global
+    # print(local_var)  # Works here
+    
+# print(local_var)  # Error! Not accessible outside`,
+                tip: '📦 Use type hints for better code documentation: def greet(name: str) -> str:',
+                readingTime: '15 min',
+                simulator: { type: 'functions' }
+            },
+            { 
+                title: 'Data Structures',
+                desc: 'Work with lists, tuples, dictionaries, and sets.',
+                concepts: [
+                    'Lists - mutable sequences',
+                    'Tuples - immutable sequences',
+                    'Dictionaries - key-value pairs',
+                    'Sets - unique elements',
+                    'List comprehensions'
+                ],
+                code: `# Python Data Structures
+
+# Lists (mutable)
+fruits = ["apple", "banana", "orange"]
+fruits.append("grape")
+fruits.insert(1, "mango")
+fruits.remove("banana")
+print(fruits[0])      # First element
+print(fruits[-1])     # Last element
+print(fruits[1:3])    # Slicing
+
+# Tuples (immutable)
+coordinates = (9.03, 38.74)  # Addis Ababa
+x, y = coordinates           # Unpacking
+print(f"Lat: {x}, Long: {y}")
+
+# Dictionaries (key-value)
+student = {
+    "name": "Hiwot",
+    "age": 22,
+    "courses": ["Math", "Physics"],
+    "grades": {"Math": 92, "Physics": 88}
+}
+student["email"] = "hiwot@example.com"
+print(student.get("phone", "Not provided"))
+
+# Sets (unique elements)
+languages = {"Amharic", "Oromo", "Tigrinya"}
+languages.add("Somali")
+languages.add("Amharic")  # Duplicate ignored
+
+# List Comprehensions
+squares = [x**2 for x in range(10)]
+even_squares = [x**2 for x in range(10) if x % 2 == 0]
+
+# Dictionary Comprehension
+square_dict = {x: x**2 for x in range(5)}`,
+                tip: '🔑 Use list comprehensions for cleaner, more Pythonic code instead of traditional loops for simple operations.',
+                readingTime: '18 min',
+                simulator: { type: 'structures' }
+            },
+            { 
+                title: 'File Handling',
+                desc: 'Read from and write to files, handle exceptions.',
+                concepts: [
+                    'Opening files with open()',
+                    'Reading (r, read, readlines)',
+                    'Writing (w, a)',
+                    'With statement (context manager)',
+                    'Try-except error handling'
+                ],
+                code: `# File Handling in Python
+
+# Writing to a file
+with open("students.txt", "w") as file:
+    file.write("Hiwot Tekle\\n")
+    file.write("Abebe Kebede\\n")
+    file.write("Selam Tesfaye\\n")
+
+# Reading from a file
+with open("students.txt", "r") as file:
+    content = file.read()
+    print("All content:")
+    print(content)
+
+# Reading line by line
+with open("students.txt", "r") as file:
+    lines = file.readlines()
+    for i, line in enumerate(lines, 1):
+        print(f"Student {i}: {line.strip()}")
+
+# Appending to a file
+with open("students.txt", "a") as file:
+    file.write("New Student\\n")
+
+# Exception Handling
+try:
+    with open("nonexistent.txt", "r") as file:
+        data = file.read()
+except FileNotFoundError:
+    print("File not found!")
+except PermissionError:
+    print("No permission to read file!")
+except Exception as e:
+    print(f"An error occurred: {e}")
+else:
+    print("File read successfully!")
+finally:
+    print("Execution complete.")`,
+                tip: '📁 Always use "with" statements when working with files - they automatically close the file even if an error occurs.',
+                readingTime: '12 min',
+                simulator: { type: 'files' }
+            },
+            { 
+                title: 'Object-Oriented Programming',
+                desc: 'Create classes and objects, inheritance, and encapsulation.',
+                concepts: [
+                    'Classes and objects',
+                    'Constructor (__init__)',
+                    'Instance methods',
+                    'Inheritance and super()',
+                    'Properties and decorators'
+                ],
+                code: `# Object-Oriented Programming
+
+class Student:
+    """Student class with attributes and methods"""
+    
+    school = "Addis Power Academy"  # Class attribute
+    
+    def __init__(self, name, age, grade):
+        self.name = name      # Instance attribute
+        self.age = age
+        self.grade = grade
+        self._id = None       # Protected attribute
+    
+    def introduce(self):
+        return f"Hi, I'm {self.name}, {self.age} years old"
+    
+    @property
+    def student_id(self):
+        return self._id
+    
+    @student_id.setter
+    def student_id(self, value):
+        if len(str(value)) == 6:
+            self._id = value
+        else:
+            raise ValueError("ID must be 6 digits")
+    
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data['name'], data['age'], data['grade'])
+
+# Inheritance
+class GraduateStudent(Student):
+    def __init__(self, name, age, grade, thesis):
+        super().__init__(name, age, grade)
+        self.thesis = thesis
+    
+    def introduce(self):  # Method override
+        return super().introduce() + f", Thesis: {self.thesis}"
+
+# Using the classes
+student1 = Student("Hiwot", 22, "A")
+student1.student_id = 123456
+print(student1.introduce())
+
+grad = GraduateStudent("Abebe", 24, "A+", "Machine Learning")
+print(grad.introduce())
+
+# Creating from dictionary
+data = {"name": "Selam", "age": 21, "grade": "A-"}
+student3 = Student.from_dict(data)`,
+                tip: '🏛️ Use @property decorator to create getter/setter methods that look like attributes (student.id instead of student.get_id()).',
+                readingTime: '20 min',
+                simulator: { type: 'oop' }
+            },
+            { 
+                title: 'Modules & Packages',
+                desc: 'Organize code with modules, imports, and external packages.',
+                concepts: [
+                    'Creating modules',
+                    'Import syntax (import, from, as)',
+                    'Standard library modules',
+                    'pip and virtual environments',
+                    '__name__ == "__main__" pattern'
+                ],
+                code: `# Working with Modules
+
+# Importing Standard Library
+import math
+import random
+from datetime import datetime
+from collections import defaultdict, Counter
+
+# Using imports
+print(f"Pi: {math.pi}")
+print(f"Random number: {random.randint(1, 100)}")
+print(f"Current time: {datetime.now()}")
+
+# Counter example
+grades = ['A', 'B', 'A', 'C', 'B', 'A', 'B']
+grade_count = Counter(grades)
+print(f"Grade distribution: {grade_count}")
+
+# Creating your own module (save as my_utils.py)
+"""
+# my_utils.py
+def celsius_to_fahrenheit(celsius):
+    return (celsius * 9/5) + 32
+
+def is_palindrome(text):
+    return text == text[::-1]
+
+if __name__ == "__main__":
+    # This runs only when script is executed directly
+    print("Testing module...")
+    print(celsius_to_fahrenheit(25))
+"""
+
+# Using your module
+# import my_utils
+# temp_f = my_utils.celsius_to_fahrenheit(30)
+
+# Package structure example
+"""
+mypackage/
+├── __init__.py
+├── math_ops.py
+└── string_ops.py
+"""
+
+# pip install popular packages
+# pip install requests pandas numpy`,
+                tip: '📚 Use `if __name__ == "__main__"` to make your Python files both importable modules and runnable scripts.',
+                readingTime: '15 min',
+                simulator: { type: 'modules' }
+            },
+            { 
+                title: '🏆 Final Project: Student Database',
+                desc: 'Build a complete student management system with file persistence.',
+                concepts: [
+                    'Class design and OOP',
+                    'File I/O operations',
+                    'Exception handling',
+                    'User input validation',
+                    'CRUD operations',
+                    'Data persistence with JSON'
+                ],
+                code: `# Complete Student Management System
+import json
+from datetime import datetime
+
+class Student:
+    def __init__(self, name, age, grade, student_id=None):
+        self.name = name
+        self.age = age
+        self.grade = grade
+        self.id = student_id or self._generate_id()
+        self.enrollment_date = datetime.now().strftime("%Y-%m-%d")
+    
+    def _generate_id(self):
+        import random
+        return f"STU{random.randint(10000, 99999)}"
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'age': self.age,
+            'grade': self.grade,
+            'enrollment_date': self.enrollment_date
+        }
+    
+    @classmethod
+    def from_dict(cls, data):
+        student = cls(data['name'], data['age'], data['grade'], data['id'])
+        student.enrollment_date = data['enrollment_date']
+        return student
+
+class StudentDatabase:
+    def __init__(self, filename='students.json'):
+        self.filename = filename
+        self.students = {}
+        self.load_data()
+    
+    def load_data(self):
+        try:
+            with open(self.filename, 'r') as file:
+                data = json.load(file)
+                self.students = {
+                    sid: Student.from_dict(sdata) 
+                    for sid, sdata in data.items()
+                }
+        except FileNotFoundError:
+            self.students = {}
+    
+    def save_data(self):
+        with open(self.filename, 'w') as file:
+            data = {sid: student.to_dict() for sid, student in self.students.items()}
+            json.dump(data, file, indent=2)
+    
+    def add_student(self, name, age, grade):
+        try:
+            age = int(age)
+            if age < 15 or age > 100:
+                raise ValueError("Age must be between 15 and 100")
+            
+            student = Student(name, age, grade)
+            self.students[student.id] = student
+            self.save_data()
+            return f"Student added successfully! ID: {student.id}"
+        except ValueError as e:
+            return f"Error: {e}"
+    
+    def get_student(self, student_id):
+        return self.students.get(student_id)
+    
+    def list_students(self):
+        if not self.students:
+            return "No students in database."
+        
+        output = []
+        for student in self.students.values():
+            output.append(
+                f"ID: {student.id} | {student.name} | "
+                f"Age: {student.age} | Grade: {student.grade}"
+            )
+        return "\\n".join(output)
+    
+    def update_grade(self, student_id, new_grade):
+        if student_id in self.students:
+            self.students[student_id].grade = new_grade
+            self.save_data()
+            return f"Grade updated for {self.students[student_id].name}"
+        return "Student not found!"
+    
+    def delete_student(self, student_id):
+        if student_id in self.students:
+            name = self.students[student_id].name
+            del self.students[student_id]
+            self.save_data()
+            return f"Student {name} deleted successfully!"
+        return "Student not found!"
+    
+    def get_statistics(self):
+        if not self.students:
+            return {"total": 0, "avg_age": 0}
+        
+        ages = [s.age for s in self.students.values()]
+        grades = [s.grade for s in self.students.values()]
+        
+        return {
+            "total": len(self.students),
+            "avg_age": sum(ages) / len(ages),
+            "grades": {g: grades.count(g) for g in set(grades)}
+        }
+
+# Example Usage
+def main():
+    db = StudentDatabase()
+    
+    while True:
+        print("\\n=== Student Management System ===")
+        print("1. Add Student")
+        print("2. List All Students")
+        print("3. Find Student")
+        print("4. Update Grade")
+        print("5. Delete Student")
+        print("6. Statistics")
+        print("7. Exit")
+        
+        choice = input("Choose option: ")
+        
+        if choice == "1":
+            name = input("Name: ")
+            age = input("Age: ")
+            grade = input("Grade: ")
+            print(db.add_student(name, age, grade))
+        
+        elif choice == "2":
+            print(db.list_students())
+        
+        elif choice == "3":
+            sid = input("Enter Student ID: ")
+            student = db.get_student(sid)
+            if student:
+                print(f"Found: {student.name}, Age: {student.age}, Grade: {student.grade}")
+            else:
+                print("Student not found!")
+        
+        elif choice == "4":
+            sid = input("Enter Student ID: ")
+            grade = input("New Grade: ")
+            print(db.update_grade(sid, grade))
+        
+        elif choice == "5":
+            sid = input("Enter Student ID to delete: ")
+            confirm = input(f"Are you sure? (y/n): ")
+            if confirm.lower() == 'y':
+                print(db.delete_student(sid))
+        
+        elif choice == "6":
+            stats = db.get_statistics()
+            print(f"Total Students: {stats['total']}")
+            print(f"Average Age: {stats['avg_age']:.1f}")
+            print("Grade Distribution:", stats.get('grades', {}))
+        
+        elif choice == "7":
+            print("Goodbye!")
+            break
+
+if __name__ == "__main__":
+    main()`,
+                tip: '🚀 Congratulations! You now have the skills to build production-ready Python applications. Keep coding and building!',
+                readingTime: '30 min',
+                simulator: { type: 'project' }
+            }
+        ];
+
+        // ========== STATE MANAGEMENT ==========
+        let currentModule = 0;
+        let completedModules = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+        let dataSaverMode = localStorage.getItem('dataSaver') === 'true';
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+
+        // DOM Elements
+        const lessonPanel = document.getElementById('lessonPanel');
+        const moduleList = document.getElementById('moduleList');
+        const progressSteps = document.getElementById('progressSteps');
+        const progressFill = document.getElementById('progressFill');
+        const themeToggle = document.getElementById('themeToggle');
+        const dataSaverToggle = document.getElementById('dataSaverToggle');
+
+        // ========== THEME MANAGEMENT ==========
+        function initTheme() {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            themeToggle.innerHTML = currentTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            themeToggle.innerHTML = currentTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // ========== DATA SAVER ==========
+        function initDataSaver() {
+            if (dataSaverMode) {
+                dataSaverToggle.classList.add('active');
+            } else {
+                dataSaverToggle.classList.remove('active');
+            }
+        }
+        
+        dataSaverToggle.addEventListener('click', () => {
+            dataSaverMode = !dataSaverMode;
+            localStorage.setItem('dataSaver', dataSaverMode);
+            initDataSaver();
+            renderModule(currentModule);
+        });
+
+        // ========== PROGRESS & UI ==========
+        function saveProgress() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify([...completedModules]));
+            localStorage.setItem('python_last_module', currentModule);
+        }
+
+        function updateProgressUI() {
+            // Update steps
+            progressSteps.innerHTML = '';
+            modules.forEach((_, idx) => {
+                const step = document.createElement('div');
+                step.className = `step ${idx === currentModule ? 'active' : ''} ${completedModules.has(idx) ? 'completed' : ''}`;
+                step.textContent = `${idx + 1}`;
+                step.addEventListener('click', () => { currentModule = idx; renderModule(currentModule); });
+                progressSteps.appendChild(step);
+            });
+            
+            // Update progress bar
+            const completedCount = completedModules.size;
+            const percent = (completedCount / modules.length) * 100;
+            progressFill.style.width = Math.min(percent, 100) + '%';
+            
+            // Update sidebar
+            moduleList.innerHTML = '';
+            modules.forEach((mod, idx) => {
+                const li = document.createElement('li');
+                li.className = `module-item ${idx === currentModule ? 'active-module' : ''} ${completedModules.has(idx) ? 'completed-module' : ''}`;
+                li.innerHTML = `
+                    <i class="fab fa-python"></i>
+                    <span>${idx + 1}. ${mod.title}</span>
+                    <i class="fas fa-check-circle check-icon"></i>
+                `;
+                li.addEventListener('click', () => { currentModule = idx; renderModule(currentModule); });
+                moduleList.appendChild(li);
+            });
+            
+            document.getElementById('moduleCount').textContent = modules.length;
+            saveProgress();
+        }
+
+        // ========== SIMULATOR RENDERERS ==========
+        function getSimulatorHTML(mod, idx) {
+            if (dataSaverMode) {
+                return `
+                    <div class="simulator-box" style="opacity:0.7;">
+                        <div class="simulator-header">
+                            <span><i class="fas fa-flask"></i> Simulator (Hidden - Data Saver Mode)</span>
+                        </div>
+                        <div class="sim-output">
+                            <i class="fas fa-sim-card"></i> Simulator hidden to save data. 
+                            <a href="#" onclick="dataSaverMode=false; localStorage.setItem('dataSaver','false'); renderModule(${idx}); return false;" style="color:var(--primary);">Disable Data Saver</a>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return `
+                <div class="simulator-box">
+                    <div class="simulator-header">
+                        <span><i class="fab fa-python"></i> Python Interactive Console</span>
+                        <button class="run-sim-btn" onclick="window.runPythonSim('${mod.simulator.type}')">
+                            <i class="fas fa-play"></i> Run Example
+                        </button>
+                    </div>
+                    <div class="sim-output" id="simOutput${idx}">
+                        Click "Run Example" to see Python output simulation
+                    </div>
+                </div>
+            `;
+        }
+
+        // ========== RENDER MODULE ==========
+        function renderModule(idx) {
+            const mod = modules[idx];
+            const completed = completedModules.has(idx);
+            
+            const html = `
+                <div class="lesson-header">
+                    <div class="lesson-meta">
+                        <span><i class="far fa-clock"></i> ${mod.readingTime}</span>
+                        <span><i class="far fa-bookmark"></i> Module ${idx + 1}/${modules.length}</span>
+                        ${completed ? '<span style="color:var(--success);"><i class="fas fa-check-circle"></i> Completed</span>' : ''}
+                    </div>
+                    <span class="lesson-badge">${idx === 7 ? '🎓 FINAL PROJECT' : 'CORE MODULE'}</span>
+                    <h2 class="lesson-title">${mod.title}</h2>
+                    <p class="lesson-desc">${mod.desc}</p>
+                </div>
+                
+                <div class="explanation">
+                    <h4><i class="fas fa-gem"></i> Learning Objectives</h4>
+                    <ul class="checklist">
+                        ${mod.concepts.map(c => `<li><i class="fas fa-check-circle"></i> ${c}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span><i class="fab fa-python"></i> Python Code</span>
+                        <button class="copy-btn" data-code="${encodeURIComponent(mod.code)}"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <pre>${escapeHTML(mod.code)}</pre>
+                </div>
+                
+                ${getSimulatorHTML(mod, idx)}
+                
+                <div class="tip-box">
+                    <i class="fas fa-lightbulb"></i>
+                    <div><strong>Pro tip:</strong> ${mod.tip}</div>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="prevBtn" ${idx === 0 ? 'disabled' : ''}>
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="nav-btn ${completed ? '' : 'complete-btn'}" id="completeBtn">
+                        ${completed ? '<i class="fas fa-check-circle"></i> Completed' : '<i class="fas fa-check"></i> Mark Complete'}
+                    </button>
+                    <button class="nav-btn" id="nextBtn">
+                        ${idx === modules.length - 1 ? 'Finish 🎓' : 'Next'} <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            `;
+            
+            lessonPanel.innerHTML = html;
+            
+            // Attach event listeners
+            document.getElementById('prevBtn')?.addEventListener('click', () => {
+                if (currentModule > 0) { currentModule--; renderModule(currentModule); updateProgressUI(); }
+            });
+            
+            document.getElementById('nextBtn')?.addEventListener('click', () => {
+                if (currentModule < modules.length - 1) {
+                    currentModule++;
+                    renderModule(currentModule);
+                    updateProgressUI();
+                } else {
+                    if (completedModules.size === modules.length) {
+                        showCertificate();
+                    }
+                }
+            });
+            
+            document.getElementById('completeBtn')?.addEventListener('click', () => {
+                if (completedModules.has(idx)) {
+                    completedModules.delete(idx);
+                } else {
+                    completedModules.add(idx);
+                }
+                updateProgressUI();
+                renderModule(idx);
+                
+                if (completedModules.size === modules.length) {
+                    showCertificate();
+                }
+            });
+            
+            // Copy button
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const code = decodeURIComponent(btn.dataset.code);
+                    navigator.clipboard?.writeText(code);
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => btn.innerHTML = '<i class="far fa-copy"></i> Copy', 1500);
+                });
+            });
+            
+            updateProgressUI();
+        }
+
+        // ========== SIMULATOR FUNCTIONS ==========
+        const simulatorOutputs = {
+            basics: `>>> name = "Ethiopia"
+>>> population = 120_000_000
+>>> print(f"Welcome to {name}!")
+Welcome to Ethiopia!
+
+>>> age = int("25")
+>>> print(f"Age next year: {age + 1}")
+Age next year: 26
+
+>>> result = 10 // 3
+>>> print(f"10 // 3 = {result}")
+10 // 3 = 3
+
+✓ Python basics executed successfully!`,
+            
+            control: `>>> score = 85
+>>> if score >= 90:
+...     grade = "A"
+... elif score >= 80:
+...     grade = "B"
+>>> print(f"Grade: {grade}")
+Grade: B
+
+>>> for i in range(1, 4):
+...     print(f"Count: {i}")
+Count: 1
+Count: 2
+Count: 3
+
+✓ Control flow demo complete!`,
+            
+            functions: `>>> def greet(name, greeting="Hello"):
+...     return f"{greeting}, {name}!"
+>>> print(greet("Developer", "Welcome"))
+Welcome, Developer!
+
+>>> def get_min_max(numbers):
+...     return min(numbers), max(numbers)
+>>> minimum, maximum = get_min_max([3, 1, 4, 1, 5])
+>>> print(f"Min: {minimum}, Max: {maximum}")
+Min: 1, Max: 5
+
+✓ Functions executed successfully!`,
+            
+            structures: `>>> fruits = ["apple", "banana", "orange"]
+>>> fruits.append("grape")
+>>> print(fruits)
+['apple', 'banana', 'orange', 'grape']
+
+>>> student = {"name": "Hiwot", "age": 22}
+>>> print(student["name"])
+Hiwot
+
+>>> squares = [x**2 for x in range(5)]
+>>> print(squares)
+[0, 1, 4, 9, 16]
+
+✓ Data structures demo complete!`,
+            
+            files: `>>> with open("test.txt", "w") as f:
+...     f.write("Hello Python!")
+>>> print("File written successfully")
+File written successfully
+
+>>> try:
+...     with open("missing.txt") as f:
+...         pass
+... except FileNotFoundError:
+...     print("File not found - handled gracefully!")
+File not found - handled gracefully!
+
+✓ File handling simulation complete!`,
+            
+            oop: `>>> class Student:
+...     def __init__(self, name):
+...         self.name = name
+...     def introduce(self):
+...         return f"Hi, I'm {self.name}"
+>>> s = Student("Hiwot")
+>>> print(s.introduce())
+Hi, I'm Hiwot
+
+>>> class GradStudent(Student):
+...     pass
+>>> gs = GradStudent("Abebe")
+>>> print(gs.introduce())
+Hi, I'm Abebe
+
+✓ OOP concepts demonstrated!`,
+            
+            modules: `>>> import math
+>>> print(f"Pi: {math.pi:.2f}")
+Pi: 3.14
+
+>>> import random
+>>> print(f"Random: {random.randint(1, 10)}")
+Random: 7
+
+>>> from datetime import datetime
+>>> print(f"Now: {datetime.now().strftime('%H:%M')}")
+Now: 14:30
+
+✓ Module imports working!`,
+            
+            project: `=== Student Management System ===
+
+>>> db.add_student("Hiwot", 22, "A")
+Student added successfully! ID: STU12345
+
+>>> db.add_student("Abebe", 24, "A+")
+Student added successfully! ID: STU67890
+
+>>> db.list_students()
+ID: STU12345 | Hiwot | Age: 22 | Grade: A
+ID: STU67890 | Abebe | Age: 24 | Grade: A+
+
+>>> db.get_statistics()
+{'total': 2, 'avg_age': 23.0, 'grades': {'A': 1, 'A+': 1}}
+
+✓ Full system simulation complete!`
+        };
+        
+        window.runPythonSim = function(type) {
+            const output = document.querySelector('[id^="simOutput"]');
+            if (output) {
+                output.innerHTML = simulatorOutputs[type] || `✓ Python ${type} simulation successful!`;
+            }
+        };
+
+        // ========== CERTIFICATE ==========
+        function showCertificate() {
+            document.getElementById('certStudentName').textContent = AUTHOR_NAME;
+            document.getElementById('certDate').innerHTML = `<i class="far fa-calendar-alt"></i> ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+            document.getElementById('certificateModal').classList.add('active');
+        }
+        
+        document.getElementById('sidebarCertificateBtn').addEventListener('click', () => {
+            if (completedModules.size === modules.length) {
+                showCertificate();
+            } else {
+                alert(`Complete all ${modules.length} modules to earn your certificate! You've completed ${completedModules.size} so far.`);
+            }
+        });
+
+        // ========== KEYBOARD SHORTCUTS ==========
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            if (e.key === 'ArrowLeft' && currentModule > 0) {
+                e.preventDefault();
+                currentModule--;
+                renderModule(currentModule);
+                updateProgressUI();
+            } else if (e.key === 'ArrowRight' && currentModule < modules.length - 1) {
+                e.preventDefault();
+                currentModule++;
+                renderModule(currentModule);
+                updateProgressUI();
+            } else if (e.key === ' ' && !e.target.closest('button')) {
+                e.preventDefault();
+                const idx = currentModule;
+                if (completedModules.has(idx)) {
+                    completedModules.delete(idx);
+                } else {
+                    completedModules.add(idx);
+                }
+                updateProgressUI();
+                renderModule(idx);
+                if (completedModules.size === modules.length) showCertificate();
+            } else if (e.key === 'Escape') {
+                document.getElementById('certificateModal').classList.remove('active');
+            }
+        });
+
+        // ========== UTILITIES ==========
+        function escapeHTML(str) {
+            return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // ========== INITIALIZE ==========
+        function init() {
+            initTheme();
+            initDataSaver();
+            
+            const lastModule = parseInt(localStorage.getItem('python_last_module') || '0');
+            if (lastModule < modules.length) currentModule = lastModule;
+            
+            renderModule(currentModule);
+            updateProgressUI();
+            
+            document.getElementById('certificateModal').addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    document.getElementById('certificateModal').classList.remove('active');
+                }
+            });
+        }
+
+        init();
+    })();
+</script>
+</body>
+</html>
