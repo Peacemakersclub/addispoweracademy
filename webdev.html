@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌐 Web Dev Fundamentals · Addis Power Academy</title>
-    <meta name="description" content="Free, interactive HTML, CSS & JavaScript course for Ethiopian beginners.">
-    <meta name="author" content="Addis Power Web Solution">
+    <title>Web Dev Fundamentals · Addis Power Academy</title>
+    <meta name="description" content="Free HTML, CSS & JavaScript course for Ethiopian beginners.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ========== WEB DEV THEME (BLUE CHARACTER) ========== */
         :root {
             --primary: #3b82f6;
             --primary-dark: #2563eb;
-            --primary-glow: rgba(59, 130, 246, 0.15);
             --bg-primary: #0a0f1e;
             --bg-secondary: #0f172a;
             --bg-tertiary: #1e2a44;
@@ -25,11 +22,8 @@
             --success: #10b981;
             --warning: #f59e0b;
         }
-        
         [data-theme="light"] {
             --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-glow: rgba(37, 99, 235, 0.1);
             --bg-primary: #f8fafc;
             --bg-secondary: #ffffff;
             --bg-tertiary: #e2e8f0;
@@ -40,42 +34,29 @@
             --card-bg: #ffffff;
             --code-bg: #1e293b;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.7;
+            line-height: 1.6;
         }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-
-        /* ========== NAVBAR ========== */
         .navbar {
             background: var(--bg-secondary);
             border-bottom: 1px solid var(--border-color);
             padding: 0.75rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 1rem;
         }
-
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
         }
-
         .logo-icon {
             background: var(--primary);
             width: 38px;
@@ -87,41 +68,24 @@
             color: white;
             font-size: 1.2rem;
         }
-
         .logo-text {
             font-weight: 800;
             font-size: 1.2rem;
         }
-
         .logo-text .power {
             background: linear-gradient(135deg, var(--primary), #60a5fa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .logo-text .academy {
             color: var(--text-muted);
             font-weight: 400;
             font-size: 0.8rem;
             margin-left: 4px;
         }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; }
         .nav-links a:hover { color: var(--primary); }
-        .nav-links a.active { color: var(--primary); }
-
         .theme-toggle {
             background: var(--bg-tertiary);
             border: none;
@@ -130,26 +94,17 @@
             height: 36px;
             border-radius: 50%;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-
-        .theme-toggle:hover { background: var(--primary); color: white; }
-
-        /* ========== PROGRESS BAR ========== */
         .progress-wrapper {
             max-width: 1200px;
             margin: 1.5rem auto 0;
             padding: 0 1.5rem;
         }
-
         .progress-steps {
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.5rem;
         }
-
         .step {
             text-align: center;
             flex: 1;
@@ -157,17 +112,14 @@
             color: var(--text-muted);
             cursor: pointer;
         }
-
         .step.active { color: var(--primary); font-weight: 700; }
         .step.completed { color: var(--success); }
-
         .progress-bar-container {
             height: 6px;
             background: var(--bg-tertiary);
             border-radius: 10px;
             margin-bottom: 1.5rem;
         }
-
         .progress-fill {
             height: 6px;
             background: var(--primary);
@@ -175,8 +127,6 @@
             width: 0%;
             transition: width 0.3s;
         }
-
-        /* ========== MAIN LAYOUT ========== */
         .course-container {
             max-width: 1300px;
             margin: 0 auto;
@@ -185,8 +135,6 @@
             grid-template-columns: 280px 1fr;
             gap: 1.5rem;
         }
-
-        /* ========== SIDEBAR ========== */
         .curriculum-sidebar {
             background: var(--card-bg);
             border-radius: 24px;
@@ -196,7 +144,6 @@
             position: sticky;
             top: 85px;
         }
-
         .sidebar-header {
             display: flex;
             justify-content: space-between;
@@ -204,9 +151,6 @@
             padding-bottom: 0.8rem;
             border-bottom: 1px solid var(--border-color);
         }
-
-        .sidebar-header h3 { font-size: 1.1rem; display: flex; align-items: center; gap: 6px; }
-
         .module-count {
             background: var(--primary);
             color: white;
@@ -214,9 +158,7 @@
             border-radius: 20px;
             font-size: 0.7rem;
         }
-
         .module-list { list-style: none; }
-
         .module-item {
             padding: 0.8rem 0.9rem;
             margin-bottom: 4px;
@@ -228,18 +170,15 @@
             gap: 10px;
             font-size: 0.9rem;
         }
-
-        .module-item i { width: 18px; color: var(--text-muted); }
         .module-item:hover { background: var(--bg-tertiary); }
         .module-item.active-module {
-            background: var(--primary-glow);
+            background: rgba(59, 130, 246, 0.15);
             color: var(--primary);
             border-left: 3px solid var(--primary);
         }
         .module-item.completed-module { color: var(--success); }
-        .module-item .check-icon { margin-left: auto; opacity: 0; font-size: 0.8rem; }
+        .module-item .check-icon { margin-left: auto; opacity: 0; }
         .module-item.completed-module .check-icon { opacity: 1; }
-
         .back-link {
             display: block;
             margin-top: 1.5rem;
@@ -249,68 +188,44 @@
             text-decoration: none;
             font-size: 0.85rem;
         }
-
         .back-link:hover { color: var(--primary); }
-
-        /* ========== LESSON PANEL ========== */
         .lesson-panel {
             background: var(--card-bg);
             border-radius: 24px;
             padding: 2rem;
             border: 1px solid var(--border-color);
         }
-
         .lesson-header {
             margin-bottom: 1.8rem;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 1.2rem;
         }
-
-        .lesson-meta {
-            display: flex;
-            gap: 1rem;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-        }
-
         .lesson-badge {
             color: var(--primary);
             text-transform: uppercase;
             font-weight: 700;
             font-size: 0.7rem;
-            background: var(--primary-glow);
+            background: rgba(59, 130, 246, 0.15);
             padding: 0.2rem 0.7rem;
             border-radius: 20px;
             display: inline-block;
         }
-
-        .lesson-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin: 0.5rem 0 0.25rem;
-        }
-
-        .lesson-desc { color: var(--text-secondary); }
-
+        .lesson-title { font-size: 2rem; font-weight: 800; margin: 0.5rem 0 0.25rem; }
         .explanation {
-            background: var(--primary-glow);
+            background: rgba(59, 130, 246, 0.1);
             border-radius: 18px;
             padding: 1.3rem;
             margin: 1.5rem 0;
             border-left: 5px solid var(--primary);
         }
-
         .checklist {
             list-style: none;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 0.3rem 1rem;
         }
-
-        .checklist li { padding: 4px 0; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
-        .checklist i { color: var(--success); font-size: 0.9rem; }
-
+        .checklist li { padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+        .checklist i { color: var(--success); }
         .code-block {
             background: var(--code-bg);
             border-radius: 16px;
@@ -318,16 +233,13 @@
             overflow: hidden;
             border: 1px solid var(--border-color);
         }
-
         .code-header {
             display: flex;
             justify-content: space-between;
             padding: 0.7rem 1.2rem;
             background: var(--bg-tertiary);
-            font-size: 0.8rem;
             border-bottom: 1px solid var(--border-color);
         }
-
         .copy-btn {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -335,21 +247,15 @@
             padding: 0.2rem 0.8rem;
             border-radius: 16px;
             cursor: pointer;
-            font-size: 0.75rem;
         }
-
-        .copy-btn:hover { background: var(--primary); color: white; }
-
         .code-block pre {
             padding: 1.2rem;
             margin: 0;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: monospace;
             font-size: 0.85rem;
-            color: var(--text-primary);
             overflow-x: auto;
             white-space: pre-wrap;
         }
-
         .simulator-box {
             background: var(--bg-primary);
             border-radius: 18px;
@@ -357,13 +263,11 @@
             margin: 1.8rem 0;
             border: 1px solid var(--border-color);
         }
-
         .simulator-header {
             display: flex;
             justify-content: space-between;
             margin-bottom: 1rem;
         }
-
         .run-sim-btn {
             background: var(--primary);
             color: white;
@@ -372,11 +276,7 @@
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.85rem;
         }
-
-        .run-sim-btn:hover { background: var(--primary-dark); }
-
         .live-preview {
             background: white;
             border-radius: 12px;
@@ -384,7 +284,6 @@
             margin-top: 1rem;
             color: #0f172a;
         }
-
         .sim-output {
             background: var(--code-bg);
             border-radius: 12px;
@@ -392,33 +291,9 @@
             margin-top: 1rem;
             font-family: monospace;
             color: var(--primary);
-            border: 1px solid var(--border-color);
         }
-
-        .css-playground {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .css-controls input {
-            width: 100%;
-            padding: 0.4rem;
-            margin-bottom: 0.4rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-
-        .preview-box {
-            padding: 1.5rem;
-            text-align: center;
-            border-radius: 10px;
-        }
-
         .tip-box {
-            background: color-mix(in srgb, var(--warning) 10%, var(--bg-primary));
+            background: rgba(245, 158, 11, 0.1);
             border-radius: 14px;
             padding: 1rem 1.2rem;
             margin: 1.5rem 0;
@@ -426,9 +301,6 @@
             display: flex;
             gap: 10px;
         }
-
-        .tip-box i { color: var(--warning); }
-
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -436,7 +308,6 @@
             padding-top: 1rem;
             border-top: 1px solid var(--border-color);
         }
-
         .nav-btn {
             background: var(--bg-tertiary);
             color: var(--text-primary);
@@ -445,36 +316,24 @@
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.9rem;
         }
-
         .nav-btn:hover { background: var(--primary); color: white; }
-        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-        /* ========== FOOTER ========== */
         .academy-footer {
             margin-top: 2rem;
-            padding: 2rem 1.5rem 1.5rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             border-top: 1px solid var(--border-color);
         }
-
         .footer-contact {
             display: flex;
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
             margin: 1rem 0;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
         }
-
         .footer-contact a { color: var(--primary); text-decoration: none; }
-
         @media (max-width: 800px) {
             .course-container { grid-template-columns: 1fr; }
-            .curriculum-sidebar { position: relative; top: 0; }
-            .css-playground { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -491,18 +350,14 @@
     <div class="nav-links">
         <a href="https://addispower.pages.dev">Home</a>
         <a href="https://peacemakersclub.github.io/addispoweracademy/">Supabase</a>
-        <a href="#" class="active">Web Dev</a>
+        <a href="#" style="color: var(--primary);">Web Dev</a>
     </div>
-    <button class="theme-toggle" id="themeToggle" title="Toggle theme">
-        <i class="fas fa-moon"></i>
-    </button>
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
 </nav>
 
 <div class="progress-wrapper">
     <div class="progress-steps" id="progressSteps"></div>
-    <div class="progress-bar-container">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
+    <div class="progress-bar-container"><div class="progress-fill" id="progressFill"></div></div>
 </div>
 
 <div class="course-container">
@@ -516,252 +371,125 @@
             <i class="fas fa-arrow-left"></i> All Courses
         </a>
     </div>
-
     <div class="lesson-panel" id="lessonPanel"></div>
 </div>
 
 <footer class="academy-footer">
-    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💎</div>
+    <div style="font-size: 1.5rem;">💎</div>
     <p style="font-weight: 700;">ADDIS POWER WEB SOLUTION</p>
-    <p style="color: var(--text-secondary); margin: 0.5rem 0;">Build without compromise.</p>
+    <p style="color: var(--text-secondary);">Build without compromise.</p>
     <div class="footer-contact">
         <span><i class="fas fa-envelope"></i> <a href="mailto:addispower@proton.me">addispower@proton.me</a></span>
         <span><i class="fab fa-telegram"></i> <a href="https://t.me/powr_addis">@powr_addis</a></span>
         <span><i class="fas fa-globe"></i> <a href="https://addispower.pages.dev">addispower.pages.dev</a></span>
     </div>
     <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1.5rem;">
-        © 2026 Addis Power Academy · Free for all Ethiopian developers
+        © 2026 Addis Power Academy · Free for Ethiopian developers
     </p>
 </footer>
 
 <script>
     (function(){
-        "use strict";
-
         const modules = [
-            {
-                title: 'HTML Foundations',
-                desc: 'Learn the skeleton of every website.',
-                concepts: ['Document structure', 'Headings & paragraphs', 'Links & images', 'Lists'],
-                code: `<!DOCTYPE html>\n<html>\n<head><title>My Page</title></head>\n<body>\n  <h1>Hello Addis!</h1>\n  <p>Welcome to web development.</p>\n  <a href="#">Learn more</a>\n</body>\n</html>`,
-                tip: '💡 HTML is markup, not programming. It structures content.',
-                readingTime: '10 min',
-                simulator: { type: 'html' }
-            },
-            {
-                title: 'CSS Basics',
-                desc: 'Style your HTML with colors and layouts.',
-                concepts: ['Selectors', 'Colors', 'Box Model', 'Flexbox'],
-                code: `body { font-family: sans-serif; background: #f0f4f8; }\nh1 { color: #2563eb; text-align: center; }\n.button { background: #3b82f6; padding: 12px 24px; border-radius: 8px; }`,
-                tip: '🎨 Classes (.) are reusable. IDs (#) are unique.',
-                readingTime: '12 min',
-                simulator: { type: 'css' }
-            },
-            {
-                title: 'CSS Layout',
-                desc: 'Position elements with Flexbox and Grid.',
-                concepts: ['Display', 'Position', 'Flexbox', 'Grid', 'Responsive'],
-                code: `.flex-center { display: flex; justify-content: center; align-items: center; }\n.grid { display: grid; grid-template-columns: repeat(3, 1fr); }\n@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }`,
-                tip: '📐 Flexbox for 1D, Grid for 2D layouts.',
-                readingTime: '12 min',
-                simulator: { type: 'layout' }
-            },
-            {
-                title: 'JavaScript Essentials',
-                desc: 'Add interactivity to your pages.',
-                concepts: ['Variables', 'Functions', 'Arrays', 'Objects', 'DOM'],
-                code: `let name = "Hiwot";\nfunction greet(n) { return "Selam, " + n; }\nconst courses = ["HTML", "CSS", "JS"];\ndocument.querySelector("h1").textContent = "Updated!";`,
-                tip: '⚠️ JavaScript ≠ Java. Completely different!',
-                readingTime: '15 min',
-                simulator: { type: 'js' }
-            },
-            {
-                title: 'DOM & Events',
-                desc: 'Make pages react to users.',
-                concepts: ['querySelector', 'createElement', 'addEventListener', 'Forms'],
-                code: `const btn = document.querySelector("button");\nbtn.addEventListener("click", () => {\n  alert("Clicked!");\n});\n\nconst p = document.createElement("p");\np.textContent = "New!";\ndocument.body.appendChild(p);`,
-                tip: '🖱️ Use addEventListener, not onclick attributes.',
-                readingTime: '15 min',
-                simulator: { type: 'dom' }
-            },
-            {
-                title: '🏆 Build a Todo App',
-                desc: 'Complete project with localStorage.',
-                concepts: ['Project structure', 'CRUD operations', 'localStorage', 'Deployment'],
-                code: `// Full Todo App\nlet todos = JSON.parse(localStorage.getItem('todos')) || [];\nfunction render() {\n  // Display todos\n}\nfunction addTodo() { /* ... */ }\nfunction deleteTodo(i) { /* ... */ }`,
-                tip: '🚀 Deploy to GitHub Pages and share your link!',
-                readingTime: '20 min',
-                simulator: { type: 'project' }
-            }
+            { title: 'HTML Foundations', desc: 'Structure with tags.', concepts: ['Doctype','Headings','Paragraphs','Links','Images'], code: '<h1>Hello</h1>\n<p>Welcome</p>\n<a href="#">Link</a>', tip: 'HTML is markup, not programming.', simulator: 'html' },
+            { title: 'CSS Basics', desc: 'Colors, fonts, box model.', concepts: ['Selectors','Colors','Margin/Padding','Flexbox'], code: 'body { background: #f0f4f8; }\nh1 { color: blue; }', tip: 'Use classes for reusable styles.', simulator: 'css' },
+            { title: 'CSS Layout', desc: 'Flexbox and Grid.', concepts: ['Flexbox','Grid','Position','Responsive'], code: '.flex { display: flex; }\n.grid { display: grid; }', tip: 'Flexbox for 1D, Grid for 2D.', simulator: 'css' },
+            { title: 'JavaScript Basics', desc: 'Variables, functions.', concepts: ['let/const','Functions','Arrays','Objects'], code: 'let name = "Hiwot";\nfunction greet() { return "Selam"; }', tip: 'JavaScript ≠ Java.', simulator: 'js' },
+            { title: 'DOM & Events', desc: 'Interact with pages.', concepts: ['querySelector','addEventListener','createElement'], code: 'document.querySelector("button").addEventListener("click", () => alert("Hi!"));', tip: 'Use addEventListener.', simulator: 'js' },
+            { title: '🏆 Todo App', desc: 'Complete project.', concepts: ['localStorage','CRUD','Deploy'], code: '// Full Todo App with localStorage', tip: 'Deploy to GitHub Pages!', simulator: 'project' }
         ];
-
-        let currentModule = 0;
-        let completedModules = new Set(JSON.parse(localStorage.getItem('webdev_completed') || '[]'));
-        let currentTheme = localStorage.getItem('theme') || 'dark';
-
-        const lessonPanel = document.getElementById('lessonPanel');
-        const moduleList = document.getElementById('moduleList');
-        const progressSteps = document.getElementById('progressSteps');
-        const progressFill = document.getElementById('progressFill');
-        const themeToggle = document.getElementById('themeToggle');
-
-        function initTheme() {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            themeToggle.innerHTML = currentTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        
+        let current = 0;
+        let completed = new Set(JSON.parse(localStorage.getItem('webdev_done')||'[]'));
+        let theme = localStorage.getItem('theme')||'dark';
+        
+        const panel = document.getElementById('lessonPanel');
+        const list = document.getElementById('moduleList');
+        const steps = document.getElementById('progressSteps');
+        const fill = document.getElementById('progressFill');
+        const toggle = document.getElementById('themeToggle');
+        
+        function setTheme() {
+            document.documentElement.setAttribute('data-theme', theme);
+            toggle.innerHTML = theme==='dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+        toggle.addEventListener('click', ()=>{
+            theme = theme==='dark'?'light':'dark';
+            localStorage.setItem('theme', theme);
+            setTheme();
+        });
+        
+        function updateUI() {
+            steps.innerHTML = '';
+            modules.forEach((_,i)=>{
+                const s = document.createElement('div');
+                s.className = `step ${i===current?'active':''} ${completed.has(i)?'completed':''}`;
+                s.textContent = i+1;
+                s.onclick = ()=>{ current=i; render(); };
+                steps.appendChild(s);
+            });
+            fill.style.width = (completed.size/modules.length)*100 + '%';
+            
+            list.innerHTML = '';
+            modules.forEach((m,i)=>{
+                const li = document.createElement('li');
+                li.className = `module-item ${i===current?'active-module':''} ${completed.has(i)?'completed-module':''}`;
+                li.innerHTML = `<i class="fas fa-${['code','paint-brush','object-group','js','mouse-pointer','trophy'][i]||'book'}"></i><span>${i+1}. ${m.title}</span><i class="fas fa-check-circle check-icon"></i>`;
+                li.onclick = ()=>{ current=i; render(); };
+                list.appendChild(li);
+            });
+            document.getElementById('moduleCount').textContent = modules.length;
+            localStorage.setItem('webdev_done', JSON.stringify([...completed]));
         }
         
-        themeToggle.addEventListener('click', () => {
-            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            localStorage.setItem('theme', currentTheme);
-            themeToggle.innerHTML = currentTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        });
-
-        function saveProgress() {
-            localStorage.setItem('webdev_completed', JSON.stringify([...completedModules]));
-            localStorage.setItem('webdev_last_module', currentModule);
-        }
-
-        function updateProgressUI() {
-            progressSteps.innerHTML = '';
-            modules.forEach((_, idx) => {
-                const step = document.createElement('div');
-                step.className = `step ${idx === currentModule ? 'active' : ''} ${completedModules.has(idx) ? 'completed' : ''}`;
-                step.textContent = `${idx + 1}`;
-                step.addEventListener('click', () => { currentModule = idx; renderModule(currentModule); });
-                progressSteps.appendChild(step);
-            });
+        function render() {
+            const m = modules[current];
+            const done = completed.has(current);
+            let sim = '';
+            if (m.simulator === 'html') sim = `<div class="simulator-box"><div class="simulator-header"><span><i class="fab fa-html5"></i> Live Preview</span><button class="run-sim-btn" onclick="document.getElementById('preview').innerHTML=document.getElementById('htmlIn').value">Run</button></div><textarea id="htmlIn" style="width:100%;height:100px;background:var(--code-bg);color:var(--text-primary);padding:0.5rem;"><h1>Hello</h1><p>Edit me</p></textarea><div class="live-preview" id="preview"><h1>Hello</h1><p>Edit me</p></div></div>`;
+            else if (m.simulator === 'css') sim = `<div class="simulator-box"><div class="simulator-header"><span><i class="fab fa-css3-alt"></i> CSS Playground</span></div><input type="color" id="bg" value="#3b82f6" onchange="document.getElementById('box').style.background=this.value"><div id="box" style="background:#3b82f6; padding:30px; border-radius:12px; margin-top:10px; color:white; text-align:center;">Style Me</div></div>`;
+            else if (m.simulator === 'js') sim = `<div class="simulator-box"><div class="simulator-header"><span><i class="fab fa-js"></i> Console</span><button class="run-sim-btn" onclick="try{ document.getElementById('jsOut').textContent = eval(document.getElementById('jsIn').value); }catch(e){ document.getElementById('jsOut').textContent = 'Error: '+e.message; }">Run</button></div><textarea id="jsIn" style="width:100%;height:60px;background:var(--code-bg);color:var(--text-primary);">'Hello ' + 'Addis'</textarea><div class="sim-output" id="jsOut">> Output</div></div>`;
+            else sim = `<div class="simulator-box"><div class="simulator-header"><span>🎓 Final Project</span></div><div class="sim-output">Build the Todo App from the code example!</div></div>`;
             
-            const percent = (completedModules.size / modules.length) * 100;
-            progressFill.style.width = Math.min(percent, 100) + '%';
-            
-            moduleList.innerHTML = '';
-            modules.forEach((mod, idx) => {
-                const li = document.createElement('li');
-                li.className = `module-item ${idx === currentModule ? 'active-module' : ''} ${completedModules.has(idx) ? 'completed-module' : ''}`;
-                li.innerHTML = `
-                    <i class="fas fa-${['code','paint-brush','object-group','js','mouse-pointer','trophy'][idx] || 'book'}"></i>
-                    <span>${idx + 1}. ${mod.title}</span>
-                    <i class="fas fa-check-circle check-icon"></i>
-                `;
-                li.addEventListener('click', () => { currentModule = idx; renderModule(currentModule); });
-                moduleList.appendChild(li);
-            });
-            
-            document.getElementById('moduleCount').textContent = modules.length;
-            saveProgress();
-        }
-
-        function getSimulatorHTML(mod) {
-            switch(mod.simulator.type) {
-                case 'html':
-                    return `
-                        <div class="simulator-box">
-                            <div class="simulator-header">
-                                <span><i class="fab fa-html5"></i> Live HTML Preview</span>
-                                <button class="run-sim-btn" onclick="window.updateHtmlPreview()">Run</button>
-                            </div>
-                            <textarea id="htmlInput" style="width:100%; height:120px; background:var(--code-bg); color:var(--text-primary); border:1px solid var(--border-color); border-radius:10px; padding:0.8rem; font-family:monospace;"><h1>Hello Addis!</h1>\n<p>Edit me!</p></textarea>
-                            <div class="live-preview" id="htmlPreview"><h1>Hello Addis!</h1><p>Edit me!</p></div>
-                        </div>`;
-                case 'css':
-                    return `
-                        <div class="simulator-box">
-                            <div class="simulator-header"><span><i class="fab fa-css3-alt"></i> CSS Playground</span></div>
-                            <div class="css-playground">
-                                <div class="css-controls">
-                                    <input type="color" id="bgColor" value="#3b82f6" onchange="window.updateCssPreview()">
-                                    <input type="range" id="borderRadius" min="0" max="30" value="12" onchange="window.updateCssPreview()">
-                                </div>
-                                <div class="preview-box" id="cssPreview" style="background:#3b82f6; color:white; border-radius:12px; padding:20px;">🎨 Style Me!</div>
-                            </div>
-                        </div>`;
-                case 'js':
-                    return `
-                        <div class="simulator-box">
-                            <div class="simulator-header">
-                                <span><i class="fab fa-js"></i> JavaScript Console</span>
-                                <button class="run-sim-btn" onclick="window.runJsCode()">Run</button>
-                            </div>
-                            <textarea id="jsInput" style="width:100%; height:80px; background:var(--code-bg); color:var(--text-primary); border:1px solid var(--border-color); border-radius:10px; padding:0.8rem; font-family:monospace;">const name = "Hiwot";\n'Selam, ' + name;</textarea>
-                            <div class="sim-output" id="jsOutput">> Output</div>
-                        </div>`;
-                default:
-                    return `<div class="simulator-box"><div class="simulator-header"><span>Simulator</span></div><div class="sim-output">Ready</div></div>`;
-            }
-        }
-
-        window.updateHtmlPreview = function() {
-            document.getElementById('htmlPreview').innerHTML = document.getElementById('htmlInput').value;
-        };
-        window.updateCssPreview = function() {
-            const p = document.getElementById('cssPreview');
-            p.style.background = document.getElementById('bgColor').value;
-            p.style.borderRadius = document.getElementById('borderRadius').value + 'px';
-        };
-        window.runJsCode = function() {
-            const out = document.getElementById('jsOutput');
-            try {
-                const result = eval(document.getElementById('jsInput').value);
-                out.innerHTML = '→ ' + (result !== undefined ? result : 'Code executed');
-            } catch(e) {
-                out.innerHTML = '❌ ' + e.message;
-            }
-        };
-
-        function renderModule(idx) {
-            const mod = modules[idx];
-            const completed = completedModules.has(idx);
-            
-            lessonPanel.innerHTML = `
+            panel.innerHTML = `
                 <div class="lesson-header">
-                    <div class="lesson-meta"><span><i class="far fa-clock"></i> ${mod.readingTime}</span><span>Module ${idx+1}/${modules.length}</span></div>
-                    <span class="lesson-badge">${idx===5?'CAPSTONE':'CORE'}</span>
-                    <h2 class="lesson-title">${mod.title}</h2>
-                    <p class="lesson-desc">${mod.desc}</p>
+                    <span class="lesson-badge">${current===5?'CAPSTONE':'CORE'}</span>
+                    <h2 class="lesson-title">${m.title}</h2>
+                    <p style="color:var(--text-secondary);">${m.desc}</p>
                 </div>
                 <div class="explanation">
-                    <h4 style="margin-bottom:0.8rem; color:var(--primary);"><i class="fas fa-gem"></i> Learning Objectives</h4>
-                    <ul class="checklist">${mod.concepts.map(c => `<li><i class="fas fa-check-circle"></i> ${c}</li>`).join('')}</ul>
+                    <h4 style="color:var(--primary); margin-bottom:0.8rem;"><i class="fas fa-gem"></i> Learning Objectives</h4>
+                    <ul class="checklist">${m.concepts.map(c=>`<li><i class="fas fa-check-circle"></i> ${c}</li>`).join('')}</ul>
                 </div>
                 <div class="code-block">
-                    <div class="code-header"><span><i class="fas fa-code"></i> Example</span><button class="copy-btn" data-code="${encodeURIComponent(mod.code)}">Copy</button></div>
-                    <pre>${mod.code.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>
+                    <div class="code-header"><span><i class="fas fa-code"></i> Example</span><button class="copy-btn" id="copyBtn">Copy</button></div>
+                    <pre>${m.code.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>
                 </div>
-                ${getSimulatorHTML(mod)}
-                <div class="tip-box"><i class="fas fa-lightbulb"></i><div><strong>Pro tip:</strong> ${mod.tip}</div></div>
+                ${sim}
+                <div class="tip-box"><i class="fas fa-lightbulb"></i><div><strong>Pro tip:</strong> ${m.tip}</div></div>
                 <div class="nav-buttons">
-                    <button class="nav-btn" id="prevBtn" ${idx===0?'disabled':''}><i class="fas fa-arrow-left"></i> Prev</button>
-                    <button class="nav-btn" id="completeBtn" style="background:${completed?'var(--success)':'var(--primary)'}; color:white;">${completed?'✓ Completed':'Mark Complete'}</button>
-                    <button class="nav-btn" id="nextBtn">${idx===5?'Finish 🎓':'Next'} <i class="fas fa-arrow-right"></i></button>
+                    <button class="nav-btn" id="prevBtn" ${current===0?'disabled':''}><i class="fas fa-arrow-left"></i> Prev</button>
+                    <button class="nav-btn" id="completeBtn" style="background:${done?'var(--success)':'var(--primary)'}; color:white;">${done?'✓ Done':'Mark Complete'}</button>
+                    <button class="nav-btn" id="nextBtn">${current===5?'Finish 🎓':'Next'} <i class="fas fa-arrow-right"></i></button>
                 </div>
             `;
             
-            document.querySelectorAll('.copy-btn').forEach(b => b.addEventListener('click', function(){
-                navigator.clipboard?.writeText(decodeURIComponent(this.dataset.code));
+            document.getElementById('copyBtn')?.addEventListener('click', function(){
+                navigator.clipboard?.writeText(m.code);
                 this.textContent = 'Copied!';
-                setTimeout(()=> this.textContent = 'Copy', 1200);
-            }));
-            
-            document.getElementById('prevBtn')?.addEventListener('click', ()=>{ if(currentModule>0){ currentModule--; renderModule(currentModule); updateProgressUI(); } });
-            document.getElementById('nextBtn')?.addEventListener('click', ()=>{
-                if(currentModule < 5) { currentModule++; renderModule(currentModule); updateProgressUI(); }
-                else { if(completedModules.size === 6) alert('🎉 Congratulations! Course complete!'); }
+                setTimeout(()=> this.textContent = 'Copy', 1000);
             });
+            document.getElementById('prevBtn')?.addEventListener('click', ()=>{ if(current>0){ current--; render(); updateUI(); } });
+            document.getElementById('nextBtn')?.addEventListener('click', ()=>{ if(current<5){ current++; render(); updateUI(); } else { if(completed.size===6) alert('🎉 Course Complete!'); } });
             document.getElementById('completeBtn')?.addEventListener('click', function(){
-                completedModules.has(idx) ? completedModules.delete(idx) : completedModules.add(idx);
-                updateProgressUI(); renderModule(idx);
+                completed.has(current) ? completed.delete(current) : completed.add(current);
+                updateUI(); render();
             });
-            updateProgressUI();
+            updateUI();
         }
-
-        function init(){
-            initTheme();
-            const last = parseInt(localStorage.getItem('webdev_last_module')||'0');
-            currentModule = last < 6 ? last : 0;
-            renderModule(currentModule);
-        }
-        init();
+        
+        setTheme();
+        render();
     })();
 </script>
 </body>
